@@ -18,8 +18,15 @@ BENCH = ROOT / "data" / "videos" / "bench"
 IMGB = ROOT / "data" / "images" / "bench"
 BENCH.mkdir(parents=True, exist_ok=True); IMGB.mkdir(parents=True, exist_ok=True)
 
-FONT_CANDIDATES = ["/System/Library/Fonts/PingFang.ttc", "/System/Library/Fonts/STHeiti Medium.ttc",
-                   "/System/Library/Fonts/Hiragino Sans GB.ttc", "/Library/Fonts/Arial Unicode.ttf"]
+# 中文字体候选，覆盖 macOS / Windows / Linux
+FONT_CANDIDATES = [
+    "/System/Library/Fonts/PingFang.ttc", "/System/Library/Fonts/STHeiti Medium.ttc",
+    "/System/Library/Fonts/Hiragino Sans GB.ttc", "/Library/Fonts/Arial Unicode.ttf",
+    "C:/Windows/Fonts/msyh.ttc", "C:/Windows/Fonts/simhei.ttf", "C:/Windows/Fonts/simsun.ttc",
+    "/usr/share/fonts/truetype/wqy/wqy-zenhei.ttc",
+    "/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc",
+    "/usr/share/fonts/truetype/arphic/uming.ttc",
+]
 
 
 def get_font(size=42):
@@ -29,6 +36,17 @@ def get_font(size=42):
                 return ImageFont.truetype(f, size)
             except Exception:
                 continue
+    # 兜底：让 matplotlib 在系统已注册的字体里找一个支持中文的
+    try:
+        from matplotlib import font_manager
+        for name in ("PingFang", "Microsoft YaHei", "SimHei", "Noto Sans CJK", "WenQuanYi"):
+            for fp in font_manager.fontManager.ttflist:
+                if name.lower() in fp.name.lower():
+                    return ImageFont.truetype(fp.fname, size)
+    except Exception:
+        pass
+    print("  [提示] 未找到中文字体，画面文字会显示为方块，OCR 相关样本将失效。"
+          "Ubuntu 可 sudo apt install fonts-wqy-zenhei。")
     return ImageFont.load_default()
 
 
@@ -49,16 +67,48 @@ def make_frame(text: str, bg=(40, 60, 90), size=(854, 480), sub: str = "") -> np
 
 
 def tts(text: str, out: Path, voice="Tingting", rate=180) -> bool:
-    aiff = out.with_suffix(".aiff")
-    r = subprocess.run(["say", "-v", voice, "-r", str(rate), "-o", str(aiff), text], capture_output=True)
-    if r.returncode != 0 or not aiff.exists():
-        r = subprocess.run(["say", "-r", str(rate), "-o", str(aiff), text], capture_output=True)
+    """合成中文语音。
+
+    优先用 macOS 自带的 `say`；非 macOS 环境依次尝试 pyttsx3 / edge-tts，
+    都不可用时返回 False（此时生成的测试视频没有音轨，语音相关的评测会自动跳过）。
+    """
+    import shutil as _sh
+    if _sh.which("say"):
+        aiff = out.with_suffix(".aiff")
+        r = subprocess.run(["say", "-v", voice, "-r", str(rate), "-o", str(aiff), text], capture_output=True)
         if r.returncode != 0 or not aiff.exists():
-            return False
-    subprocess.run(["ffmpeg", "-y", "-v", "error", "-i", str(aiff), "-ar", "16000", "-ac", "1", str(out)],
-                   capture_output=True)
-    aiff.unlink(missing_ok=True)
-    return out.exists()
+            r = subprocess.run(["say", "-r", str(rate), "-o", str(aiff), text], capture_output=True)
+        if aiff.exists():
+            subprocess.run(["ffmpeg", "-y", "-v", "error", "-i", str(aiff), "-ar", "16000", "-ac", "1", str(out)],
+                           capture_output=True)
+            aiff.unlink(missing_ok=True)
+            if out.exists():
+                return True
+    # 非 macOS 回退
+    try:
+        import pyttsx3
+        eng = pyttsx3.init()
+        eng.setProperty("rate", rate)
+        eng.save_to_file(text, str(out))
+        eng.runAndWait()
+        if out.exists() and out.stat().st_size > 1024:
+            return True
+    except Exception:
+        pass
+    try:
+        tmp_mp3 = out.with_suffix(".mp3")
+        r = subprocess.run(["edge-tts", "--voice", "zh-CN-XiaoxiaoNeural", "--text", text,
+                            "--write-media", str(tmp_mp3)], capture_output=True, timeout=120)
+        if r.returncode == 0 and tmp_mp3.exists():
+            subprocess.run(["ffmpeg", "-y", "-v", "error", "-i", str(tmp_mp3), "-ar", "16000", "-ac", "1", str(out)],
+                           capture_output=True)
+            tmp_mp3.unlink(missing_ok=True)
+            return out.exists()
+    except Exception:
+        pass
+    print("  [提示] 未找到可用的语音合成工具，测试视频将不含音轨。"
+          "macOS 自带 say；其他系统可 pip install pyttsx3 或 edge-tts。")
+    return False
 
 
 def build_video(name: str, frames: list[np.ndarray], secs_per_frame: float, audio_text: str | None,

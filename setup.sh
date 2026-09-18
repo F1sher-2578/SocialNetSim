@@ -9,6 +9,25 @@ MIRROR="https://pypi.tuna.tsinghua.edu.cn/simple"
 export HF_ENDPOINT="https://hf-mirror.com"
 
 log() { printf "\n\033[1;34m==> %s\033[0m\n" "$1"; }
+die() { printf "\n\033[1;31m[缺少依赖] %s\033[0m\n" "$1"; exit 1; }
+
+# ---------------------------------------------------------------- 0. 前置检查
+log "0/7 检查运行环境"
+command -v python3 >/dev/null || die "未找到 python3。macOS: brew install python@3.11；Ubuntu: sudo apt install python3.11"
+PYV=$(python3 -c 'import sys;print(f"{sys.version_info.major}.{sys.version_info.minor}")')
+echo "  python3      $PYV"
+case "$PYV" in
+    3.1[0-9]|3.9) ;;
+    *) echo "  [警告] 建议 Python 3.10–3.12，当前 $PYV 可能有兼容问题" ;;
+esac
+command -v ffmpeg  >/dev/null || die "未找到 ffmpeg（视频解码必需）。macOS: brew install ffmpeg；Ubuntu: sudo apt install ffmpeg；Windows: winget install ffmpeg"
+command -v ffprobe >/dev/null || die "未找到 ffprobe（通常随 ffmpeg 一起安装）"
+command -v curl    >/dev/null || die "未找到 curl"
+echo "  ffmpeg       $(ffmpeg -version 2>/dev/null | head -1 | cut -d' ' -f3)"
+FREE=$(df -Pg . | awk 'NR==2{print $4}')
+echo "  可用磁盘     ${FREE}G（需要约 4G：模型 1.5G + 数据 1.3G + 依赖 1.2G）"
+[ "${FREE:-99}" -lt 4 ] && echo "  [警告] 磁盘空间可能不足"
+command -v say >/dev/null || echo "  [提示] 非 macOS 环境：合成测试视频的语音需 pip install edge-tts，否则该切片无音轨"
 
 # ---------------------------------------------------------------- 1. 虚拟环境
 log "1/7 创建虚拟环境"
@@ -18,7 +37,7 @@ if ! command -v uv >/dev/null 2>&1; then
     $PY -m pip install -q --upgrade pip -i "$MIRROR"
     PIP="$PY -m pip install -q -i $MIRROR"
 else
-    [ -d .venv ] || uv venv .venv --python 3.11
+    [ -d .venv ] || uv venv .venv --python 3.11 || uv venv .venv
     PIP="uv pip install --python $PY --index-url $MIRROR"
 fi
 

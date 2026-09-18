@@ -7,6 +7,21 @@
 
 > 所有功能仅在本机 SQLite 沙箱内运行，不与任何真实社交平台交互，不使用任何真实违规素材。
 
+![信息流](docs/screenshots/feed.png)
+
+<table>
+<tr>
+<td width="50%"><img src="docs/screenshots/detect.png" alt="水军检测"><br><sub>水军检测：特征消融与跨团伙泛化</sub></td>
+<td width="50%"><img src="docs/screenshots/chat.png" alt="安全助手"><br><sub>安全助手：提示注入攻防演示</sub></td>
+</tr>
+</table>
+
+**三个最关键的结论**（详见[实验报告](docs/实验报告.md)）：
+
+1. 水军检测 AUC 1.000 看着完美，但**换一种没见过的规避手法，检出率直接掉到 0**。
+2. 深伪检测模型在自己的测试集上 AUC 0.999，**换一批真实照片就有 72% 被误判成伪造**。
+3. 图像防御在攻击者知情的情况下**全部失效**，唯一例外是扰动小到被 JPEG 压缩物理抹掉时。
+
 ---
 
 ## 一、功能对照实验要求
@@ -22,15 +37,143 @@
 
 ---
 
-## 二、快速开始
+## 二、在你的电脑上跑起来
+
+### 2.1 先装好这三样
+
+| 依赖 | 作用 | macOS | Windows | Ubuntu |
+|---|---|---|---|---|
+| **Python 3.10–3.12** | 运行环境 | `brew install python@3.11` | [官网下载](https://www.python.org/downloads/)，安装时勾选 *Add to PATH* | `sudo apt install python3.11 python3.11-venv` |
+| **ffmpeg** | 视频解码、抽音轨（必需） | `brew install ffmpeg` | `winget install ffmpeg` | `sudo apt install ffmpeg` |
+| **git** | 拉代码 | 自带 | [git-scm.com](https://git-scm.com/) | `sudo apt install git` |
+
+验证一下，三条命令都要有输出：
 
 ```bash
-cd SocialNetSim
-bash setup.sh          # 建虚拟环境、装依赖、下载模型与数据、初始化沙箱
-./run_server.sh        # 启动 Web 界面，浏览器打开 http://127.0.0.1:8000
+python3 --version
+ffmpeg -version
+git --version
 ```
 
-Web 界面包含六个页面：信息流、水军控制台、水军检测、内容审核、安全助手、攻防实验。
+还需要：**约 4 GB 磁盘**（依赖 1.2G + 模型 1.5G + 数据 1.3G）和**能联网**（首次要下模型和数据）。
+
+> **Windows 用户注意**：`setup.sh` 是 bash 脚本，请在 **Git Bash**（装 git 时自带）或 **WSL** 里运行，
+> 不要用 CMD/PowerShell。如果不想用 bash，见下面 2.4 的手动步骤。
+
+---
+
+### 2.2 三步跑起来
+
+```bash
+git clone https://github.com/F1sher-2578/SocialNetSim.git
+cd SocialNetSim
+bash setup.sh
+```
+
+`setup.sh` 会自动做完 7 件事，**全程约 20–40 分钟**（主要时间花在下模型和数据上）：
+
+| 步骤 | 内容 | 大约耗时 |
+|---|---|---|
+| 0 | 检查 python/ffmpeg/磁盘空间，缺什么会直接告诉你怎么装 | 数秒 |
+| 1–2 | 建虚拟环境 `.venv/`，装依赖 | 2–5 分钟 |
+| 3 | 下载 8 个预训练模型（走 hf-mirror 镜像，国内可直连） | 5–15 分钟 |
+| 4 | 下载数据集：COLD 中文语料、真假人脸、CIFAR-10、XD-Violence 视频子集 | 10–20 分钟 |
+| 5 | 生成仿真沙箱：80 个正常用户 + 11 个水军团伙的 30 天行为 | 约 1 分钟 |
+| 6 | 阈值校准：在正常素材上估计各专家的分数分布 | 3–5 分钟 |
+| 7 | 自检：逐项验证文本审核、语音、护栏、信息流是否正常 | 数秒 |
+
+看到最后打印 **`全部通过`** 就说明装好了。
+
+然后启动界面：
+
+```bash
+./run_server.sh
+```
+
+浏览器打开 **http://127.0.0.1:8000** 。
+
+> 数据集**没有**放进仓库（1.3 GB，且 XD-Violence 是有版权的电影片段不能转发），
+> 所以必须跑一次 `setup.sh` 才能有数据。代码、实验结果、图表都在仓库里，可以直接看。
+
+---
+
+### 2.3 界面上可以点什么
+
+六个页面，建议按这个顺序看：
+
+| 页面 | 能做什么 | 推荐动作 |
+|---|---|---|
+| **信息流** | 看仿真出来的社交平台，水军账号带红色标记 | 在发布框输入 `加 微 信 xk8899 领取内部优惠`，看审核如何拦截 |
+| **水军控制台** | 发起新的水军任务，选策略、账号数、**规避等级** | 用规避等级 0 和 2 各发一次，对比检测分数差异 |
+| **水军检测** | 跑检测模型，看消融、泛化、特征重要性 | 点「重新提取特征并评估」，看跨规避等级泛化那一栏 |
+| **内容审核** | 上传图片/视频做多模态审核 | 上传 `data/videos/bench/gambling_short.mp4`，会生成可视化报告 |
+| **安全助手** | 提示注入攻防演示 | **关掉**护栏开关，点左侧攻击样例发送，再打开护栏重发一次对比 |
+| **攻防实验** | 汇总展示所有实验数据 | 直接看，不用跑 |
+
+---
+
+### 2.4 不想用 setup.sh 的话（手动步骤）
+
+```bash
+# 1. 虚拟环境
+python3 -m venv .venv
+source .venv/bin/activate          # Windows: .venv\Scripts\activate
+
+# 2. 依赖（国内建议加清华源）
+pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
+pip install pyarrow funasr -i https://pypi.tuna.tsinghua.edu.cn/simple
+
+# 3. 模型（逐个下载，HF_ENDPOINT 指向镜像）
+export HF_ENDPOINT=https://hf-mirror.com     # Windows CMD: set HF_ENDPOINT=https://hf-mirror.com
+python scripts_download_models.py Falconsai/nsfw_image_detection
+python scripts_download_models.py openai/clip-vit-base-patch32
+python scripts_download_models.py thu-coai/roberta-base-cold
+python scripts_download_models.py dima806/deepfake_vs_real_image_detection
+python scripts_download_models.py openai/whisper-base
+
+# 4. 数据
+python scripts_fetch_xdviolence.py --violent 20 --normal 20   # 想省流量可以调小
+python scripts_make_testset.py
+
+# 5. 沙箱 + 校准
+python experiments/exp_bot_detection.py
+python scripts_calibrate.py
+
+# 6. 启动
+python -m uvicorn socialsim.app.main:app --host 127.0.0.1 --port 8000
+```
+
+---
+
+### 2.5 常见问题
+
+**装依赖很慢或超时**
+国内网络请加清华源：`pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple`
+
+**模型下载失败 / 连不上 huggingface.co**
+本项目默认走镜像 `https://hf-mirror.com`，已在 `socialsim/__init__.py` 里设置。
+如果仍失败，手动导出后重试：`export HF_ENDPOINT=https://hf-mirror.com`。
+
+**提示 `No module named 'socialsim'`**
+在项目根目录运行，或用 `.venv/bin/python` 而不是系统 python。
+
+**提示 `ffmpeg not found`**
+ffmpeg 没装或没进 PATH。Windows 装完要重开终端。
+
+**Web 界面打开是空的 / 信息流没内容**
+沙箱数据库没生成。跑一次 `python experiments/exp_bot_detection.py` 重建。
+
+**非 macOS，合成测试视频没有声音**
+语音合成在 macOS 上用系统自带的 `say`。其他系统装一个即可：
+`pip install edge-tts`（联网，中文效果好）或 `pip install pyttsx3`（离线）。
+
+**端口 8000 被占用**
+`./run_server.sh --port 8001`，然后访问 8001。
+
+**没有 GPU 能跑吗**
+能。全部模型都可在 CPU 上推理，本项目就是在 Mac M4 的 CPU/MPS 上完成的。
+Windows/Linux 上会自动回退到 CPU，视频审核会慢一些但不影响结果。
+多个实验同时跑会争抢显存，可用 `SOCIALSIM_DEVICE=cpu` 强制其中一个走 CPU。
 
 ---
 
