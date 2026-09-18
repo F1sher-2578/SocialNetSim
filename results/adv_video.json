@@ -1,0 +1,224 @@
+{
+  "n_targets": 3,
+  "budget": 20,
+  "attacks": {
+    "A2_关键帧躲避": {
+      "before": [
+        0.8712437992529117,
+        0.895951394621678,
+        1.0
+      ],
+      "after": [
+        0.7524890543389349,
+        0.5475805652960556,
+        0.9344309678030106
+      ],
+      "escaped": 0,
+      "n": 3,
+      "extra": [
+        {
+          "original_risky_len": 4.0,
+          "new_risky_len": 0.4
+        },
+        {
+          "original_risky_len": 2.246,
+          "new_risky_len": 0.4
+        },
+        {
+          "original_risky_len": 4.0,
+          "new_risky_len": 0.4
+        }
+      ]
+    },
+    "A3_镜头切换灌水": {
+      "before": [
+        0.8712437992529117,
+        0.895951394621678,
+        1.0
+      ],
+      "after": [
+        0.9505579591715863,
+        0.4478239925309786,
+        0.9543698261707455
+      ],
+      "escaped": 0,
+      "n": 3,
+      "extra": [
+        {
+          "n_flashes": 80,
+          "frames_inserted": 80,
+          "detect": {
+            "cut_rate_per_sec": 0.11,
+            "suspicious": false,
+            "threshold": 2.0
+          }
+        },
+        {
+          "n_flashes": 80,
+          "frames_inserted": 80,
+          "detect": {
+            "cut_rate_per_sec": 0.552,
+            "suspicious": false,
+            "threshold": 2.0
+          }
+        },
+        {
+          "n_flashes": 80,
+          "frames_inserted": 80,
+          "detect": {
+            "cut_rate_per_sec": 0.272,
+            "suspicious": false,
+            "threshold": 2.0
+          }
+        }
+      ]
+    },
+    "A4a_重压缩crf40": {
+      "before": [
+        0.8712437992529117,
+        0.895951394621678,
+        1.0
+      ],
+      "after": [
+        0.8480414482216909,
+        0.8545938886174123,
+        1.0
+      ],
+      "escaped": 0,
+      "n": 3,
+      "extra": [
+        {
+          "crf": 40,
+          "scale": 1.0,
+          "fps": null,
+          "size_ratio": 0.495746862014663
+        },
+        {
+          "crf": 40,
+          "scale": 1.0,
+          "fps": null,
+          "size_ratio": 0.5198970382822572
+        },
+        {
+          "crf": 40,
+          "scale": 1.0,
+          "fps": null,
+          "size_ratio": 0.5415060730859335
+        }
+      ]
+    },
+    "A4b_降分辨率0.4": {
+      "before": [
+        0.8712437992529117,
+        0.895951394621678,
+        1.0
+      ],
+      "after": [
+        0.3330971317356139,
+        0.2886526833165424,
+        0.85
+      ],
+      "escaped": 2,
+      "n": 3,
+      "extra": [
+        {
+          "crf": 28,
+          "scale": 0.4,
+          "fps": null,
+          "size_ratio": 0.5010258536109623
+        },
+        {
+          "crf": 28,
+          "scale": 0.4,
+          "fps": null,
+          "size_ratio": 0.5157678040551923
+        },
+        {
+          "crf": 28,
+          "scale": 0.4,
+          "fps": null,
+          "size_ratio": 0.537056828864318
+        }
+      ]
+    },
+    "A4c_画中画0.35": {
+      "before": [
+        0.8712437992529117,
+        0.895951394621678,
+        1.0
+      ],
+      "after": [
+        0.7181481688099745,
+        0.32887417210686537,
+        0.85
+      ],
+      "escaped": 1,
+      "n": 3,
+      "extra": [
+        {
+          "scale": 0.35,
+          "area_ratio": 0.12249999999999998
+        },
+        {
+          "scale": 0.35,
+          "area_ratio": 0.12249999999999998
+        },
+        {
+          "scale": 0.35,
+          "area_ratio": 0.12249999999999998
+        }
+      ]
+    }
+  },
+  "defenses": {
+    "budget_24": {
+      "mean_score": 0.8765,
+      "mean_time_s": 5.7
+    },
+    "budget_48": {
+      "mean_score": 0.7932,
+      "mean_time_s": 6.5
+    },
+    "budget_80": {
+      "mean_score": 0.8317,
+      "mean_time_s": 6.2
+    }
+  },
+  "summary": {
+    "A4b_降分辨率0.4": {
+      "n": 3,
+      "mean_before": 0.9224,
+      "mean_after": 0.4906,
+      "mean_drop": 0.4318,
+      "escape_rate": 0.6667
+    },
+    "A4c_画中画0.35": {
+      "n": 3,
+      "mean_before": 0.9224,
+      "mean_after": 0.6323,
+      "mean_drop": 0.2901,
+      "escape_rate": 0.3333
+    },
+    "A2_关键帧躲避": {
+      "n": 3,
+      "mean_before": 0.9224,
+      "mean_after": 0.7448,
+      "mean_drop": 0.1776,
+      "escape_rate": 0.0
+    },
+    "A3_镜头切换灌水": {
+      "n": 3,
+      "mean_before": 0.9224,
+      "mean_after": 0.7843,
+      "mean_drop": 0.1381,
+      "escape_rate": 0.0
+    },
+    "A4a_重压缩crf40": {
+      "n": 3,
+      "mean_before": 0.9224,
+      "mean_after": 0.9009,
+      "mean_drop": 0.0215,
+      "escape_rate": 0.0
+    }
+  }
+}

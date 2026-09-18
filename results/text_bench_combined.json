@@ -1,0 +1,100 @@
+{
+  "S1_COLD_offensive": {
+    "n": 1200,
+    "positive_rate": 0.412,
+    "rule_only": {
+      "acc": 0.5867,
+      "f1": 0.057,
+      "precision": 0.4839,
+      "recall": 0.0303,
+      "auc": 0.5037
+    },
+    "model_only": {
+      "acc": 0.8208,
+      "f1": 0.7977,
+      "precision": 0.7465,
+      "recall": 0.8566,
+      "auc": 0.8964
+    },
+    "fused": {
+      "acc": 0.815,
+      "f1": 0.7933,
+      "precision": 0.7358,
+      "recall": 0.8606,
+      "auc": 0.8871
+    }
+  },
+  "S2_spam_ads": {
+    "n": 512,
+    "positive_rate": 0.219,
+    "rule_only": {
+      "acc": 1.0,
+      "f1": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "auc": 1.0
+    },
+    "model_only": {
+      "acc": 0.7812,
+      "f1": 0.0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "auc": 0.5867
+    },
+    "fused": {
+      "acc": 1.0,
+      "f1": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "auc": 1.0
+    }
+  },
+  "S3_combined": {
+    "n": 1712,
+    "positive_rate": 0.355,
+    "rule_only": {
+      "acc": 0.7103,
+      "f1": 0.3387,
+      "precision": 0.8881,
+      "recall": 0.2092,
+      "auc": 0.5968
+    },
+    "model_only": {
+      "acc": 0.809,
+      "f1": 0.7217,
+      "precision": 0.7465,
+      "recall": 0.6985,
+      "auc": 0.8562
+    },
+    "fused": {
+      "acc": 0.8703,
+      "f1": 0.829,
+      "precision": 0.7786,
+      "recall": 0.8863,
+      "auc": 0.9144
+    }
+  },
+  "cold_by_topic_model_only": {
+    "gender": {
+      "acc": 0.8372,
+      "f1": 0.8272,
+      "precision": 0.7836,
+      "recall": 0.8758,
+      "auc": 0.9102
+    },
+    "race": {
+      "acc": 0.8175,
+      "f1": 0.8076,
+      "precision": 0.7563,
+      "recall": 0.8663,
+      "auc": 0.894
+    },
+    "region": {
+      "acc": 0.8116,
+      "f1": 0.7622,
+      "precision": 0.705,
+      "recall": 0.8294,
+      "auc": 0.893
+    }
+  }
+}

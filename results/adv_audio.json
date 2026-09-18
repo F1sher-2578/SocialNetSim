@@ -1,0 +1,770 @@
+{
+  "videos": {
+    "ad_scam_short.mp4": {
+      "clean_text": "兼职刷单日入300，加微信XK8899，点击链接领红包，无抵押秒。",
+      "clean_audit": {
+        "score": 0.8500000000000001,
+        "verdict": "block",
+        "labels": [
+          "contact_wechat",
+          "fraud",
+          "spam"
+        ]
+      },
+      "attacks": {
+        "speed_1.15x": {
+          "text": "兼职刷单日入300，加微信XK8899点击链接领红包，无抵押。",
+          "score": 0.85,
+          "verdict": "block",
+          "cer": 0.061,
+          "snr_db": -1.4,
+          "escaped": false,
+          "time_s": 1.0
+        },
+        "speed_0.85x": {
+          "text": "兼职刷单日入300，加微信XK8899，点击链接领红包，无抵押秒。",
+          "score": 0.85,
+          "verdict": "block",
+          "cer": 0.0,
+          "snr_db": -1.7,
+          "escaped": false,
+          "time_s": 1.7
+        },
+        "pitch_+3": {
+          "text": "兼职刷单日入300加微信XK8899，点击链接领红包，无抵押秒。",
+          "score": 0.85,
+          "verdict": "block",
+          "cer": 0.03,
+          "snr_db": -1.7,
+          "escaped": false,
+          "time_s": 1.6
+        },
+        "pitch_-3": {
+          "text": "兼职刷单日入300，加微信XK8899，点击链接领红包，无抵押秒。",
+          "score": 0.85,
+          "verdict": "block",
+          "cer": 0.0,
+          "snr_db": -1.7,
+          "escaped": false,
+          "time_s": 1.1
+        },
+        "noise_snr10": {
+          "text": "兼持刷单日入300，加微信XK8899，点击链接领红包，无抵押秒。",
+          "score": 0.85,
+          "verdict": "block",
+          "cer": 0.03,
+          "snr_db": 10.0,
+          "escaped": false,
+          "time_s": 1.0
+        },
+        "noise_snr5": {
+          "text": "兼职刷单日入300，加微信XK8899，点击链接领红包，无抵押秒。",
+          "score": 0.85,
+          "verdict": "block",
+          "cer": 0.0,
+          "snr_db": 5.0,
+          "escaped": false,
+          "time_s": 1.0
+        },
+        "noise_snr0": {
+          "text": "兼职刷单月录300，加微信X8899，点击链接领红包无抵押秒。",
+          "score": 0.85,
+          "verdict": "block",
+          "cer": 0.121,
+          "snr_db": -0.0,
+          "escaped": false,
+          "time_s": 1.1
+        },
+        "bandpass_tel": {
+          "text": "兼职刷单日入300，加微信XK8899，点击链接领红包，无抵押秒。",
+          "score": 0.85,
+          "verdict": "block",
+          "cer": 0.0,
+          "snr_db": -2.1,
+          "escaped": false,
+          "time_s": 1.3
+        },
+        "echo": {
+          "text": "兼职刷单日入300，加微信SK8899，点击链接领红包，无抵押秒。",
+          "score": 0.85,
+          "verdict": "block",
+          "cer": 0.03,
+          "snr_db": 3.0,
+          "escaped": false,
+          "time_s": 1.4
+        },
+        "time_mask": {
+          "text": "兼职刷单日入300，加微信XK8899，点击链接领红包，无抵押秒。",
+          "score": 0.85,
+          "verdict": "block",
+          "cer": 0.0,
+          "snr_db": 9.9,
+          "escaped": false,
+          "time_s": 1.2
+        },
+        "volume_0.05": {
+          "text": "兼职刷单日入300，加微信XK8899，点击链接领红包，无抵押秒。",
+          "score": 0.85,
+          "verdict": "block",
+          "cer": 0.0,
+          "snr_db": 0.4,
+          "escaped": false,
+          "time_s": 1.4
+        },
+        "psycho_-25dB": {
+          "text": "兼职刷单日入300，加微信XK8899，点击链接领红包，无抵押秒。",
+          "score": 0.85,
+          "verdict": "block",
+          "cer": 0.0,
+          "snr_db": 30.6,
+          "escaped": false,
+          "time_s": 1.1
+        },
+        "psycho_-15dB": {
+          "text": "兼职刷单日入300，加微信XK8899，点击链接领红包，无抵押秒。",
+          "score": 0.85,
+          "verdict": "block",
+          "cer": 0.0,
+          "snr_db": 20.7,
+          "escaped": false,
+          "time_s": 1.0
+        },
+        "keyword_mask": {
+          "text": "发单日入300进XK8899链接领红包，无抵押秒。",
+          "score": 0.014,
+          "verdict": "pass",
+          "cer": 0.303,
+          "snr_db": 6.1,
+          "escaped": true,
+          "adaptive": true,
+          "time_s": 76.9,
+          "defenses": {
+            "loudness_norm": {
+              "verdict": "pass",
+              "score": 0.014
+            },
+            "spectral_sub": {
+              "verdict": "pass",
+              "score": 0.014
+            },
+            "resample_8k": {
+              "verdict": "pass",
+              "score": 0.014
+            },
+            "norm+specsub": {
+              "verdict": "pass",
+              "score": 0.014
+            }
+          }
+        },
+        "selective_overlay": {
+          "text": "发单日入300，加微信8899，点击链接领红包，无抵押秒。",
+          "score": 0.6,
+          "verdict": "review",
+          "cer": 0.152,
+          "snr_db": 3.7,
+          "escaped": false,
+          "adaptive": true,
+          "time_s": 54.5
+        }
+      }
+    },
+    "insult_speech_short.mp4": {
+      "clean_text": "你这个傻逼给我滚出去，脑残废物去死吧。",
+      "clean_audit": {
+        "score": 1.0,
+        "verdict": "block",
+        "labels": [
+          "insult",
+          "offensive"
+        ]
+      },
+      "attacks": {
+        "speed_1.15x": {
+          "text": "你这个傻逼给我滚出去，脑残废物去死吧。",
+          "score": 1.0,
+          "verdict": "block",
+          "cer": 0.0,
+          "snr_db": -1.0,
+          "escaped": false,
+          "time_s": 0.9
+        },
+        "speed_0.85x": {
+          "text": "你这个傻逼给我滚出去，脑残废物去死吧。",
+          "score": 1.0,
+          "verdict": "block",
+          "cer": 0.0,
+          "snr_db": -1.2,
+          "escaped": false,
+          "time_s": 1.0
+        },
+        "pitch_+3": {
+          "text": "你这个傻逼给我滚出去，脑残废物去死吧。",
+          "score": 1.0,
+          "verdict": "block",
+          "cer": 0.0,
+          "snr_db": -1.8,
+          "escaped": false,
+          "time_s": 0.9
+        },
+        "pitch_-3": {
+          "text": "你这个傻逼给我滚出去，脑残废物去死吧。",
+          "score": 1.0,
+          "verdict": "block",
+          "cer": 0.0,
+          "snr_db": -1.5,
+          "escaped": false,
+          "time_s": 0.9
+        },
+        "noise_snr10": {
+          "text": "你这个傻逼给我滚出去，脑残废物去死吧。",
+          "score": 1.0,
+          "verdict": "block",
+          "cer": 0.0,
+          "snr_db": 10.0,
+          "escaped": false,
+          "time_s": 1.1
+        },
+        "noise_snr5": {
+          "text": "你这个傻逼给我滚出去，脑残废物去死吧。",
+          "score": 1.0,
+          "verdict": "block",
+          "cer": 0.0,
+          "snr_db": 5.0,
+          "escaped": false,
+          "time_s": 1.3
+        },
+        "noise_snr0": {
+          "text": "你这个傻逼给我滚出去，脑残废物，去死吧。",
+          "score": 1.0,
+          "verdict": "block",
+          "cer": 0.053,
+          "snr_db": -0.0,
+          "escaped": false,
+          "time_s": 1.5
+        },
+        "bandpass_tel": {
+          "text": "你这个傻逼给我滚出去，脑残废物去死吧。",
+          "score": 1.0,
+          "verdict": "block",
+          "cer": 0.0,
+          "snr_db": -2.0,
+          "escaped": false,
+          "time_s": 0.9
+        },
+        "echo": {
+          "text": "你这个傻逼给我滚出去，脑残废物去死吧。",
+          "score": 1.0,
+          "verdict": "block",
+          "cer": 0.0,
+          "snr_db": 3.4,
+          "escaped": false,
+          "time_s": 1.4
+        },
+        "time_mask": {
+          "text": "你这个傻逼给我滚出去，脑残废物去死吧。",
+          "score": 1.0,
+          "verdict": "block",
+          "cer": 0.0,
+          "snr_db": 6.5,
+          "escaped": false,
+          "time_s": 1.3
+        },
+        "volume_0.05": {
+          "text": "",
+          "score": 0.0,
+          "verdict": "pass",
+          "cer": 1.0,
+          "snr_db": 0.4,
+          "escaped": true,
+          "time_s": 0.0,
+          "defenses": {
+            "loudness_norm": {
+              "verdict": "block",
+              "score": 1.0
+            },
+            "spectral_sub": {
+              "verdict": "block",
+              "score": 1.0
+            },
+            "resample_8k": {
+              "verdict": "pass",
+              "score": 0.0
+            },
+            "norm+specsub": {
+              "verdict": "block",
+              "score": 1.0
+            }
+          }
+        },
+        "psycho_-25dB": {
+          "text": "你这个傻逼给我滚出去，脑残废物去死吧。",
+          "score": 1.0,
+          "verdict": "block",
+          "cer": 0.0,
+          "snr_db": 30.6,
+          "escaped": false,
+          "time_s": 1.3
+        },
+        "psycho_-15dB": {
+          "text": "你这个傻逼给我滚出去，脑残废物去死吧。",
+          "score": 1.0,
+          "verdict": "block",
+          "cer": 0.0,
+          "snr_db": 20.6,
+          "escaped": false,
+          "time_s": 1.5
+        },
+        "keyword_mask": {
+          "text": "你这个傻逼给我滚出去，脑残废物去死吧。",
+          "score": 1.0,
+          "verdict": "block",
+          "cer": 0.0,
+          "snr_db": null,
+          "escaped": false,
+          "adaptive": true,
+          "time_s": 15.6
+        },
+        "selective_overlay": {
+          "text": "你这个傻逼给我滚出去，脑残废物去死吧。",
+          "score": 1.0,
+          "verdict": "block",
+          "cer": 0.0,
+          "snr_db": null,
+          "escaped": false,
+          "adaptive": true,
+          "time_s": 12.1
+        }
+      }
+    },
+    "gambling_short.mp4": {
+      "clean_text": "棋牌平台首充返水50%，百家乐六合。",
+      "clean_audit": {
+        "score": 0.9,
+        "verdict": "block",
+        "labels": [
+          "gambling"
+        ]
+      },
+      "attacks": {
+        "speed_1.15x": {
+          "text": "棋牌平台首充凡水50%，百家乐六合。",
+          "score": 1.0,
+          "verdict": "block",
+          "cer": 0.056,
+          "snr_db": -1.0,
+          "escaped": false,
+          "time_s": 0.9
+        },
+        "speed_0.85x": {
+          "text": "棋牌平台首充反水50%，百家乐六合。",
+          "score": 1.0,
+          "verdict": "block",
+          "cer": 0.056,
+          "snr_db": -1.5,
+          "escaped": false,
+          "time_s": 1.0
+        },
+        "pitch_+3": {
+          "text": "棋牌平台首充反水50%，百家乐6合。",
+          "score": 1.0,
+          "verdict": "block",
+          "cer": 0.111,
+          "snr_db": -1.6,
+          "escaped": false,
+          "time_s": 1.0
+        },
+        "pitch_-3": {
+          "text": "排平台首充反水50%，百家乐6合。",
+          "score": 1.0,
+          "verdict": "block",
+          "cer": 0.222,
+          "snr_db": -1.6,
+          "escaped": false,
+          "time_s": 1.0
+        },
+        "noise_snr10": {
+          "text": "棋牌平台首充反水50%，百家乐六合。",
+          "score": 1.0,
+          "verdict": "block",
+          "cer": 0.056,
+          "snr_db": 10.0,
+          "escaped": false,
+          "time_s": 0.9
+        },
+        "noise_snr5": {
+          "text": "奇才平台首充反水50%，百家乐六合。",
+          "score": 1.0,
+          "verdict": "block",
+          "cer": 0.167,
+          "snr_db": 5.0,
+          "escaped": false,
+          "time_s": 1.0
+        },
+        "noise_snr0": {
+          "text": "集材平台首充反水50%，百家乐六合。",
+          "score": 1.0,
+          "verdict": "block",
+          "cer": 0.167,
+          "snr_db": -0.0,
+          "escaped": false,
+          "time_s": 0.9
+        },
+        "bandpass_tel": {
+          "text": "棋牌平台首充返水50%，百家乐6合。",
+          "score": 0.9,
+          "verdict": "block",
+          "cer": 0.056,
+          "snr_db": -1.9,
+          "escaped": false,
+          "time_s": 1.1
+        },
+        "echo": {
+          "text": "棋牌平台首充反水50%，百家乐6合。",
+          "score": 1.0,
+          "verdict": "block",
+          "cer": 0.111,
+          "snr_db": 3.3,
+          "escaped": false,
+          "time_s": 0.9
+        },
+        "time_mask": {
+          "text": "棋牌平台首充凡水50%，百家乐六合。",
+          "score": 1.0,
+          "verdict": "block",
+          "cer": 0.056,
+          "snr_db": 7.0,
+          "escaped": false,
+          "time_s": 0.9
+        },
+        "volume_0.05": {
+          "text": "",
+          "score": 0.0,
+          "verdict": "pass",
+          "cer": 1.0,
+          "snr_db": 0.4,
+          "escaped": true,
+          "time_s": 0.0,
+          "defenses": {
+            "loudness_norm": {
+              "verdict": "block",
+              "score": 0.9
+            },
+            "spectral_sub": {
+              "verdict": "block",
+              "score": 1.0
+            },
+            "resample_8k": {
+              "verdict": "pass",
+              "score": 0.0
+            },
+            "norm+specsub": {
+              "verdict": "block",
+              "score": 1.0
+            }
+          }
+        },
+        "psycho_-25dB": {
+          "text": "棋牌平台首充返水50%，百家乐六合。",
+          "score": 0.9,
+          "verdict": "block",
+          "cer": 0.0,
+          "snr_db": 30.7,
+          "escaped": false,
+          "time_s": 1.0
+        },
+        "psycho_-15dB": {
+          "text": "棋牌平台首充返水50%，百家乐六合。",
+          "score": 0.9,
+          "verdict": "block",
+          "cer": 0.0,
+          "snr_db": 20.8,
+          "escaped": false,
+          "time_s": 1.4
+        },
+        "keyword_mask": {
+          "text": "平台首充返水50%，百家乐六合。",
+          "score": 0.85,
+          "verdict": "block",
+          "cer": 0.111,
+          "snr_db": 10.6,
+          "escaped": false,
+          "adaptive": true,
+          "time_s": 32.6
+        },
+        "selective_overlay": {
+          "text": "棋牌平台首充防水50%，百家乐六合。",
+          "score": 0.85,
+          "verdict": "block",
+          "cer": 0.056,
+          "snr_db": 4.8,
+          "escaped": false,
+          "adaptive": true,
+          "time_s": 21.4
+        }
+      }
+    },
+    "long_mixed_with_ad.mp4": {
+      "clean_text": "这是一段较长的视频，前面都是正常内容，中间会出现一段推广内容，加微信领取内部优惠，兼职日结，后面继续正常内容。",
+      "clean_audit": {
+        "score": 0.8500000000000001,
+        "verdict": "block",
+        "labels": [
+          "fraud",
+          "spam"
+        ]
+      },
+      "attacks": {
+        "speed_1.15x": {
+          "text": "这是一段较长的视频，前面都是正常内容，中间会出现一段推广内容，加微信领取内部优惠兼职日结，后面继续正常内容。",
+          "score": 0.85,
+          "verdict": "block",
+          "cer": 0.018,
+          "snr_db": -1.4,
+          "escaped": false,
+          "time_s": 1.1
+        },
+        "speed_0.85x": {
+          "text": "这是一段较长的视频，前面都是正常内容，中间会出现一段推广内容，加微信领取内部优惠兼职日结后面继续正常内容。",
+          "score": 0.85,
+          "verdict": "block",
+          "cer": 0.036,
+          "snr_db": -1.5,
+          "escaped": false,
+          "time_s": 1.9
+        },
+        "pitch_+3": {
+          "text": "这是一段较长的视频，前面都是正常内容，中间会出现一段推广内容，加微信领取内幕优惠兼职日结，后面继续正常内容。",
+          "score": 0.8,
+          "verdict": "block",
+          "cer": 0.036,
+          "snr_db": -1.6,
+          "escaped": false,
+          "time_s": 1.1
+        },
+        "pitch_-3": {
+          "text": "这是一段较长的视频，前面都是正常内容，中间会出现一段推广内容，加微信领取内幕优惠，兼职日结，后面继续正常内容。",
+          "score": 0.8,
+          "verdict": "block",
+          "cer": 0.018,
+          "snr_db": -1.6,
+          "escaped": false,
+          "time_s": 1.5
+        },
+        "noise_snr10": {
+          "text": "这是一段较长的视频，前面都是正常内容，中间会出现一段推广内容，加微信领取内部优惠，兼职日结，后面继续正常内容。",
+          "score": 0.85,
+          "verdict": "block",
+          "cer": 0.0,
+          "snr_db": 10.0,
+          "escaped": false,
+          "time_s": 1.9
+        },
+        "noise_snr5": {
+          "text": "这是一段较长的视频，前面都是正常内容，中间会出现一段推广内容，加微信领取内部优惠，兼职日结，后面继续正常内容。",
+          "score": 0.85,
+          "verdict": "block",
+          "cer": 0.0,
+          "snr_db": 5.0,
+          "escaped": false,
+          "time_s": 1.2
+        },
+        "noise_snr0": {
+          "text": "这是一段较长的视频，前年都是正常内容，中间会出现一段推广内容，加微信领取内部优惠，兼职日子，后面继续正常内容。",
+          "score": 0.8,
+          "verdict": "block",
+          "cer": 0.036,
+          "snr_db": -0.0,
+          "escaped": false,
+          "time_s": 1.2
+        },
+        "bandpass_tel": {
+          "text": "这是一段较长的视频，前面都是正常内容，中间会出现一段推广内容，加微信领取内部优惠，兼职日结，后面继续正常内容。",
+          "score": 0.85,
+          "verdict": "block",
+          "cer": 0.0,
+          "snr_db": -2.2,
+          "escaped": false,
+          "time_s": 1.2
+        },
+        "echo": {
+          "text": "这是一段较长的视频，前面都是正常内容，中间会出现一段推广内容，加微信领取内部优惠兼职日结，后面继续正常内容。",
+          "score": 0.85,
+          "verdict": "block",
+          "cer": 0.018,
+          "snr_db": 2.4,
+          "escaped": false,
+          "time_s": 1.2
+        },
+        "time_mask": {
+          "text": "这是一段较长的视频，前面都是正常内容，中间会出现一段推广内容，加微信领取内部优惠，兼职日结，后面继续正常内容。",
+          "score": 0.85,
+          "verdict": "block",
+          "cer": 0.0,
+          "snr_db": 11.6,
+          "escaped": false,
+          "time_s": 1.3
+        },
+        "volume_0.05": {
+          "text": "这是一段较长的视频，前面都是正常内容，中间会出现一段推广内容，加微信领取内部优惠兼职日结，后面继续正常内容。",
+          "score": 0.85,
+          "verdict": "block",
+          "cer": 0.018,
+          "snr_db": 0.4,
+          "escaped": false,
+          "time_s": 1.7
+        },
+        "psycho_-25dB": {
+          "text": "这是一段较长的视频，前面都是正常内容，中间会出现一段推广内容，加微信领取内部优惠，兼职日结，后面继续正常内容。",
+          "score": 0.85,
+          "verdict": "block",
+          "cer": 0.0,
+          "snr_db": 30.4,
+          "escaped": false,
+          "time_s": 1.6
+        },
+        "psycho_-15dB": {
+          "text": "这是一段较长的视频，前面都是正常内容，中间会出现一段推广内容，加微信领取内部优惠，兼职日结，后面继续正常内容。",
+          "score": 0.85,
+          "verdict": "block",
+          "cer": 0.0,
+          "snr_db": 20.5,
+          "escaped": false,
+          "time_s": 1.3
+        },
+        "keyword_mask": {
+          "text": "这是一段较长的视频，前面都是正常内容，中间会出现一段推广内容，微信领取内部优惠兼职日结，后面继续正常内容。",
+          "score": 0.8,
+          "verdict": "block",
+          "cer": 0.036,
+          "snr_db": 13.6,
+          "escaped": false,
+          "adaptive": true,
+          "time_s": 107.8
+        },
+        "selective_overlay": {
+          "text": "这是一段较长的视频，前面都是正常内容，中间会出现一段推广内容，并领取内部优惠兼职日结，后面继续正常内容。",
+          "score": 0.8,
+          "verdict": "block",
+          "cer": 0.073,
+          "snr_db": 9.6,
+          "escaped": false,
+          "adaptive": true,
+          "time_s": 69.9
+        }
+      }
+    }
+  },
+  "summary": {
+    "attacks": {
+      "volume_0.05": {
+        "escape_rate": 0.5,
+        "n": 4,
+        "mean_cer": 0.505,
+        "mean_snr_db": 0.4
+      },
+      "keyword_mask": {
+        "escape_rate": 0.25,
+        "n": 4,
+        "mean_cer": 0.113,
+        "mean_snr_db": 10.1
+      },
+      "speed_1.15x": {
+        "escape_rate": 0.0,
+        "n": 4,
+        "mean_cer": 0.034,
+        "mean_snr_db": -1.2
+      },
+      "speed_0.85x": {
+        "escape_rate": 0.0,
+        "n": 4,
+        "mean_cer": 0.023,
+        "mean_snr_db": -1.4
+      },
+      "pitch_+3": {
+        "escape_rate": 0.0,
+        "n": 4,
+        "mean_cer": 0.044,
+        "mean_snr_db": -1.7
+      },
+      "pitch_-3": {
+        "escape_rate": 0.0,
+        "n": 4,
+        "mean_cer": 0.06,
+        "mean_snr_db": -1.6
+      },
+      "noise_snr10": {
+        "escape_rate": 0.0,
+        "n": 4,
+        "mean_cer": 0.021,
+        "mean_snr_db": 10.0
+      },
+      "noise_snr5": {
+        "escape_rate": 0.0,
+        "n": 4,
+        "mean_cer": 0.042,
+        "mean_snr_db": 5.0
+      },
+      "noise_snr0": {
+        "escape_rate": 0.0,
+        "n": 4,
+        "mean_cer": 0.094,
+        "mean_snr_db": -0.0
+      },
+      "bandpass_tel": {
+        "escape_rate": 0.0,
+        "n": 4,
+        "mean_cer": 0.014,
+        "mean_snr_db": -2.1
+      },
+      "echo": {
+        "escape_rate": 0.0,
+        "n": 4,
+        "mean_cer": 0.04,
+        "mean_snr_db": 3.0
+      },
+      "time_mask": {
+        "escape_rate": 0.0,
+        "n": 4,
+        "mean_cer": 0.014,
+        "mean_snr_db": 8.7
+      },
+      "psycho_-25dB": {
+        "escape_rate": 0.0,
+        "n": 4,
+        "mean_cer": 0.0,
+        "mean_snr_db": 30.6
+      },
+      "psycho_-15dB": {
+        "escape_rate": 0.0,
+        "n": 4,
+        "mean_cer": 0.0,
+        "mean_snr_db": 20.6
+      },
+      "selective_overlay": {
+        "escape_rate": 0.0,
+        "n": 4,
+        "mean_cer": 0.07,
+        "mean_snr_db": 6.0
+      }
+    },
+    "defenses": {
+      "loudness_norm": {
+        "recovery_rate": 0.667,
+        "n": 3
+      },
+      "spectral_sub": {
+        "recovery_rate": 0.667,
+        "n": 3
+      },
+      "resample_8k": {
+        "recovery_rate": 0.0,
+        "n": 3
+      },
+      "norm+specsub": {
+        "recovery_rate": 0.667,
+        "n": 3
+      }
+    }
+  }
+}

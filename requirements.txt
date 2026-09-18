@@ -1,0 +1,43 @@
+# --- core DL ---
+torch>=2.4
+torchvision
+torchaudio
+transformers>=4.44,<5
+safetensors
+sentencepiece
+protobuf
+accelerate
+# --- web ---
+fastapi
+uvicorn[standard]
+sqlalchemy>=2.0
+jinja2
+python-multipart
+aiofiles
+httpx
+# --- data / ML ---
+numpy
+scipy
+scikit-learn
+pandas
+matplotlib
+seaborn
+tqdm
+pyyaml
+networkx
+# --- media ---
+opencv-python-headless
+pillow
+librosa
+soundfile
+rapidocr_onnxruntime
+onnxruntime
+# --- chinese text ---
+jieba
+pypinyin
+opencc-python-reimplemented
+emoji
+# --- report ---
+python-docx
+# --- optional LLM ---
+anthropic

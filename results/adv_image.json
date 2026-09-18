@@ -1,0 +1,450 @@
+{
+  "n_attacked": 20,
+  "clean_detection_rate": 1.0,
+  "clean_mean_prob": 0.998391118645668,
+  "device": "cpu",
+  "whitebox": {
+    "eps_1/255": {
+      "fgsm_asr": 0.8,
+      "fgsm_mean_prob": 0.21889205986517482,
+      "pgd_asr": 0.95,
+      "pgd_mean_prob": 0.055762947542825715,
+      "pgd_linf": 0.003921598196029663,
+      "pgd_psnr_db": 49.38686508869118,
+      "time_s": 48.5
+    },
+    "eps_2/255": {
+      "fgsm_asr": 0.9,
+      "fgsm_mean_prob": 0.10473971467872616,
+      "pgd_asr": 1.0,
+      "pgd_mean_prob": 0.00043545289372559637,
+      "pgd_linf": 0.007843166589736938,
+      "pgd_psnr_db": 44.25506280575648,
+      "time_s": 48.7
+    },
+    "eps_4/255": {
+      "fgsm_asr": 0.9,
+      "fgsm_mean_prob": 0.10084137524827383,
+      "pgd_asr": 1.0,
+      "pgd_mean_prob": 0.00033661038760328664,
+      "pgd_linf": 0.01568630337715149,
+      "pgd_psnr_db": 39.22140361506813,
+      "time_s": 48.5
+    },
+    "eps_8/255": {
+      "fgsm_asr": 0.95,
+      "fgsm_mean_prob": 0.05693268238101155,
+      "pgd_asr": 1.0,
+      "pgd_mean_prob": 0.0003241425583837554,
+      "pgd_linf": 0.03137257695198059,
+      "pgd_psnr_db": 34.1015857529201,
+      "time_s": 47.8
+    },
+    "eps_16/255": {
+      "fgsm_asr": 0.85,
+      "fgsm_mean_prob": 0.15914088524878026,
+      "pgd_asr": 1.0,
+      "pgd_mean_prob": 0.0003283785801613703,
+      "pgd_linf": 0.0627451241016388,
+      "pgd_psnr_db": 28.350653655471568,
+      "time_s": 50.4
+    }
+  },
+  "blackbox_spsa": {
+    "eps_8/255": {
+      "asr": 0.0,
+      "avg_queries": 360.0,
+      "time_s": 274.5
+    },
+    "eps_16/255": {
+      "asr": 0.625,
+      "avg_queries": 360.0,
+      "time_s": 164.0
+    }
+  },
+  "natural": {
+    "jpeg_q40": {
+      "asr": 0.0,
+      "mean_prob": 0.9981353223323822
+    },
+    "jpeg_q20": {
+      "asr": 0.0,
+      "mean_prob": 0.9971602320671081
+    },
+    "jpeg_q10": {
+      "asr": 0.05,
+      "mean_prob": 0.9602797277271747
+    },
+    "downscale_0.5": {
+      "asr": 0.0,
+      "mean_prob": 0.9979795753955841
+    },
+    "downscale_0.25": {
+      "asr": 0.2,
+      "mean_prob": 0.8066682152450084
+    },
+    "gauss_noise_8": {
+      "asr": 0.0,
+      "mean_prob": 0.9907645523548126
+    },
+    "gauss_noise_20": {
+      "asr": 0.0,
+      "mean_prob": 0.9932333171367645
+    },
+    "hflip": {
+      "asr": 0.0,
+      "mean_prob": 0.9984473198652267
+    },
+    "rotate_5": {
+      "asr": 0.0,
+      "mean_prob": 0.9866246342658996
+    },
+    "rotate_15": {
+      "asr": 0.0,
+      "mean_prob": 0.9827543348073959
+    },
+    "white_border": {
+      "asr": 0.0,
+      "mean_prob": 0.9979261428117752
+    },
+    "blur": {
+      "asr": 0.0,
+      "mean_prob": 0.9882957309484481
+    }
+  },
+  "defense_by_eps": {
+    "eps_1/255": {
+      "none": {
+        "recovered_rate": 0.05,
+        "clean_accuracy": 1.0,
+        "adv_mean_prob": 0.056095416028983894
+      },
+      "jpeg75": {
+        "recovered_rate": 0.95,
+        "clean_accuracy": 1.0,
+        "adv_mean_prob": 0.9546050690114498
+      },
+      "jpeg50": {
+        "recovered_rate": 0.15,
+        "clean_accuracy": 1.0,
+        "adv_mean_prob": 0.1461208067368716
+      },
+      "bit4": {
+        "recovered_rate": 0.3,
+        "clean_accuracy": 1.0,
+        "adv_mean_prob": 0.28822099086246455
+      },
+      "bit3": {
+        "recovered_rate": 0.6,
+        "clean_accuracy": 0.95,
+        "adv_mean_prob": 0.6105034358712146
+      },
+      "median3": {
+        "recovered_rate": 0.05,
+        "clean_accuracy": 1.0,
+        "adv_mean_prob": 0.08075755356112495
+      },
+      "blur1.0": {
+        "recovered_rate": 0.15,
+        "clean_accuracy": 1.0,
+        "adv_mean_prob": 0.14756736395938788
+      },
+      "randresize": {
+        "recovered_rate": 0.65,
+        "clean_accuracy": 1.0,
+        "adv_mean_prob": 0.6582464780192823
+      },
+      "randomized_ensemble": {
+        "recovered_rate": 0.95,
+        "clean_accuracy": 1.0,
+        "adv_mean_prob": 0.9489797666668892
+      }
+    },
+    "eps_2/255": {
+      "none": {
+        "recovered_rate": 0.0,
+        "clean_accuracy": 1.0,
+        "adv_mean_prob": 0.0004198353184619918
+      },
+      "jpeg75": {
+        "recovered_rate": 0.35,
+        "clean_accuracy": 1.0,
+        "adv_mean_prob": 0.351320269954158
+      },
+      "jpeg50": {
+        "recovered_rate": 0.05,
+        "clean_accuracy": 1.0,
+        "adv_mean_prob": 0.05149977360997582
+      },
+      "bit4": {
+        "recovered_rate": 0.05,
+        "clean_accuracy": 1.0,
+        "adv_mean_prob": 0.051203978445846586
+      },
+      "bit3": {
+        "recovered_rate": 0.3,
+        "clean_accuracy": 0.95,
+        "adv_mean_prob": 0.3033706109941704
+      },
+      "median3": {
+        "recovered_rate": 0.0,
+        "clean_accuracy": 1.0,
+        "adv_mean_prob": 0.009487471658212598
+      },
+      "blur1.0": {
+        "recovered_rate": 0.05,
+        "clean_accuracy": 1.0,
+        "adv_mean_prob": 0.07304429549403721
+      },
+      "randresize": {
+        "recovered_rate": 0.15,
+        "clean_accuracy": 1.0,
+        "adv_mean_prob": 0.15331441578455268
+      },
+      "randomized_ensemble": {
+        "recovered_rate": 0.7,
+        "clean_accuracy": 1.0,
+        "adv_mean_prob": 0.687362823553849
+      }
+    },
+    "eps_4/255": {
+      "none": {
+        "recovered_rate": 0.0,
+        "clean_accuracy": 1.0,
+        "adv_mean_prob": 0.0003357915295055136
+      },
+      "jpeg75": {
+        "recovered_rate": 0.0,
+        "clean_accuracy": 1.0,
+        "adv_mean_prob": 0.0006066040106816218
+      },
+      "jpeg50": {
+        "recovered_rate": 0.0,
+        "clean_accuracy": 1.0,
+        "adv_mean_prob": 0.0013630055036628619
+      },
+      "bit4": {
+        "recovered_rate": 0.0,
+        "clean_accuracy": 1.0,
+        "adv_mean_prob": 0.0003827187028946355
+      },
+      "bit3": {
+        "recovered_rate": 0.15,
+        "clean_accuracy": 0.95,
+        "adv_mean_prob": 0.1590963152833865
+      },
+      "median3": {
+        "recovered_rate": 0.0,
+        "clean_accuracy": 1.0,
+        "adv_mean_prob": 0.00036668456596089527
+      },
+      "blur1.0": {
+        "recovered_rate": 0.0,
+        "clean_accuracy": 1.0,
+        "adv_mean_prob": 0.00042496302776271475
+      },
+      "randresize": {
+        "recovered_rate": 0.0,
+        "clean_accuracy": 1.0,
+        "adv_mean_prob": 0.021936395324883052
+      },
+      "randomized_ensemble": {
+        "recovered_rate": 0.6,
+        "clean_accuracy": 1.0,
+        "adv_mean_prob": 0.5741289335564943
+      }
+    },
+    "eps_8/255": {
+      "none": {
+        "recovered_rate": 0.0,
+        "clean_accuracy": 1.0,
+        "adv_mean_prob": 0.0003240923935663886
+      },
+      "jpeg75": {
+        "recovered_rate": 0.0,
+        "clean_accuracy": 1.0,
+        "adv_mean_prob": 0.00034718109818641094
+      },
+      "jpeg50": {
+        "recovered_rate": 0.0,
+        "clean_accuracy": 1.0,
+        "adv_mean_prob": 0.00041356423462275417
+      },
+      "bit4": {
+        "recovered_rate": 0.0,
+        "clean_accuracy": 1.0,
+        "adv_mean_prob": 0.0003300250114989467
+      },
+      "bit3": {
+        "recovered_rate": 0.1,
+        "clean_accuracy": 0.95,
+        "adv_mean_prob": 0.0835725634577102
+      },
+      "median3": {
+        "recovered_rate": 0.0,
+        "clean_accuracy": 1.0,
+        "adv_mean_prob": 0.0003407961194170639
+      },
+      "blur1.0": {
+        "recovered_rate": 0.0,
+        "clean_accuracy": 1.0,
+        "adv_mean_prob": 0.0003737676510354504
+      },
+      "randresize": {
+        "recovered_rate": 0.05,
+        "clean_accuracy": 1.0,
+        "adv_mean_prob": 0.03704215118341381
+      },
+      "randomized_ensemble": {
+        "recovered_rate": 0.3,
+        "clean_accuracy": 1.0,
+        "adv_mean_prob": 0.3121201633824967
+      }
+    }
+  },
+  "defense": {
+    "none": {
+      "recovered_rate": 0.0,
+      "clean_accuracy": 1.0,
+      "adv_mean_prob": 0.0003240923935663886
+    },
+    "jpeg75": {
+      "recovered_rate": 0.0,
+      "clean_accuracy": 1.0,
+      "adv_mean_prob": 0.00034718109818641094
+    },
+    "jpeg50": {
+      "recovered_rate": 0.0,
+      "clean_accuracy": 1.0,
+      "adv_mean_prob": 0.00041356423462275417
+    },
+    "bit4": {
+      "recovered_rate": 0.0,
+      "clean_accuracy": 1.0,
+      "adv_mean_prob": 0.0003300250114989467
+    },
+    "bit3": {
+      "recovered_rate": 0.1,
+      "clean_accuracy": 0.95,
+      "adv_mean_prob": 0.0835725634577102
+    },
+    "median3": {
+      "recovered_rate": 0.0,
+      "clean_accuracy": 1.0,
+      "adv_mean_prob": 0.0003407961194170639
+    },
+    "blur1.0": {
+      "recovered_rate": 0.0,
+      "clean_accuracy": 1.0,
+      "adv_mean_prob": 0.0003737676510354504
+    },
+    "randresize": {
+      "recovered_rate": 0.05,
+      "clean_accuracy": 1.0,
+      "adv_mean_prob": 0.03704215118341381
+    },
+    "randomized_ensemble": {
+      "recovered_rate": 0.3,
+      "clean_accuracy": 1.0,
+      "adv_mean_prob": 0.3121201633824967
+    }
+  },
+  "feature_squeezing": {
+    "auc": 0.12000000000000002,
+    "adv_mean_diff": 4.9856772238854316e-05,
+    "clean_mean_diff": 0.0013508141040802003,
+    "best_threshold": 0.05,
+    "tpr": 0.0,
+    "fpr": 0.0
+  },
+  "feature_squeezing_eps2": {
+    "auc": 0.6125,
+    "adv_mean_diff": 0.0760766599123599
+  },
+  "adaptive_bpda_by_eps": {
+    "eps_1/255": {
+      "jpeg75": {
+        "asr": 0.0,
+        "adaptive_recovered": 1.0,
+        "static_recovered": 0.95
+      },
+      "bit3": {
+        "asr": 1.0,
+        "adaptive_recovered": 0.0,
+        "static_recovered": 0.6
+      },
+      "bit4": {
+        "asr": 0.9,
+        "adaptive_recovered": 0.09999999999999998,
+        "static_recovered": 0.3
+      },
+      "median3": {
+        "asr": 1.0,
+        "adaptive_recovered": 0.0,
+        "static_recovered": 0.05
+      }
+    },
+    "eps_2/255": {
+      "jpeg75": {
+        "asr": 1.0,
+        "adaptive_recovered": 0.0,
+        "static_recovered": 0.35
+      },
+      "bit3": {
+        "asr": 1.0,
+        "adaptive_recovered": 0.0,
+        "static_recovered": 0.3
+      },
+      "bit4": {
+        "asr": 1.0,
+        "adaptive_recovered": 0.0,
+        "static_recovered": 0.05
+      },
+      "median3": {
+        "asr": 1.0,
+        "adaptive_recovered": 0.0,
+        "static_recovered": 0.0
+      }
+    },
+    "eps_8/255": {
+      "jpeg75": {
+        "asr": 1.0,
+        "adaptive_recovered": 0.0,
+        "static_recovered": 0.0
+      },
+      "bit3": {
+        "asr": 1.0,
+        "adaptive_recovered": 0.0,
+        "static_recovered": 0.1
+      },
+      "bit4": {
+        "asr": 1.0,
+        "adaptive_recovered": 0.0,
+        "static_recovered": 0.0
+      },
+      "median3": {
+        "asr": 1.0,
+        "adaptive_recovered": 0.0,
+        "static_recovered": 0.0
+      }
+    }
+  },
+  "adaptive_bpda": {
+    "jpeg75": {
+      "asr": 1.0,
+      "static_recovered": 0.0
+    },
+    "bit3": {
+      "asr": 1.0,
+      "static_recovered": 0.1
+    },
+    "bit4": {
+      "asr": 1.0,
+      "static_recovered": 0.0
+    },
+    "median3": {
+      "asr": 1.0,
+      "static_recovered": 0.0
+    }
+  }
+}

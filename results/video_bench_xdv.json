@@ -1,0 +1,2538 @@
+{
+  "xdviolence": {
+    "name": "XD-Violence (official test subset)",
+    "n": 62,
+    "n_pos": 42,
+    "auc": 0.8923,
+    "ap": 0.9401,
+    "auc_visual": 0.9119,
+    "auc_asr": 0.3155,
+    "auc_ocr": 0.4875,
+    "adaptive_thresholds": {
+      "review": 0.8859,
+      "block": 0.9446
+    },
+    "thresholds": [
+      {
+        "threshold": 0.4,
+        "precision": 0.6885,
+        "recall": 1.0,
+        "f1": 0.8155,
+        "fpr": 0.95,
+        "tp": 42,
+        "fp": 19,
+        "fn": 0,
+        "tn": 1
+      },
+      {
+        "threshold": 0.7,
+        "precision": 0.7119,
+        "recall": 1.0,
+        "f1": 0.8317,
+        "fpr": 0.85,
+        "tp": 42,
+        "fp": 17,
+        "fn": 0,
+        "tn": 3
+      },
+      {
+        "threshold": 0.8859,
+        "precision": 0.7959,
+        "recall": 0.9286,
+        "f1": 0.8571,
+        "fpr": 0.5,
+        "tp": 39,
+        "fp": 10,
+        "fn": 3,
+        "tn": 10
+      },
+      {
+        "threshold": 0.9446,
+        "precision": 0.9412,
+        "recall": 0.7619,
+        "f1": 0.8421,
+        "fpr": 0.1,
+        "tp": 32,
+        "fp": 2,
+        "fn": 10,
+        "tn": 18
+      }
+    ],
+    "visual_channel": {
+      "auc": 0.9119,
+      "at_review": {
+        "threshold": 0.8858775563647192,
+        "precision": 0.8043,
+        "recall": 0.881,
+        "f1": 0.8409,
+        "fpr": 0.45,
+        "tp": 37,
+        "fp": 9,
+        "fn": 5,
+        "tn": 11
+      },
+      "at_block": {
+        "threshold": 0.9446356323574036,
+        "precision": 0.9677,
+        "recall": 0.7143,
+        "f1": 0.8219,
+        "fpr": 0.05,
+        "tp": 30,
+        "fp": 1,
+        "fn": 12,
+        "tn": 19
+      }
+    },
+    "label_scope_mismatch": {
+      "n": 0,
+      "n_negatives": 20,
+      "ratio": 0.0,
+      "examples": []
+    },
+    "temporal": {
+      "n": 41,
+      "mean_iou": 0.2287,
+      "mean_hit_rate": 0.6084
+    },
+    "mean_elapsed_s": 10.01,
+    "mean_duration_s": 114.3,
+    "realtime_factor": 11.42,
+    "rows": [
+      {
+        "file": "City.of.God.2002__00-37-20_00-38-02_label_B5-0-0.mp4",
+        "truth": 1,
+        "categories": [
+          "abuse"
+        ],
+        "score": 0.8757,
+        "visual": 0.8757,
+        "asr": 0.1591,
+        "ocr": 0.0,
+        "verdict": "pass",
+        "labels": [
+          "horror",
+          "horror_cartoon",
+          "horror_game",
+          "violence_game"
+        ],
+        "duration": 42.1,
+        "n_frames": 36,
+        "elapsed": 15.4,
+        "cue": 0.0,
+        "categories_score": {
+          "violence_visual": 0.8757,
+          "audio_cue": 0.0,
+          "offensive_speech": 0.0,
+          "spam_fraud": 0.0,
+          "gambling_porn_drugs": 0.0
+        },
+        "temporal": {
+          "iou": 0.0,
+          "hit_rate": 0.0,
+          "n_gt": 1,
+          "n_pred": 1
+        }
+      },
+      {
+        "file": "Deadpool.2016__0-18-58_0-19-20_label_B1-0-0.mp4",
+        "truth": 1,
+        "categories": [
+          "fighting"
+        ],
+        "score": 0.8773,
+        "visual": 0.8773,
+        "asr": 0.0,
+        "ocr": 0.0,
+        "verdict": "pass",
+        "labels": [
+          "gore_cartoon",
+          "nsfw_cartoon",
+          "violence_cartoon"
+        ],
+        "duration": 22.1,
+        "n_frames": 20,
+        "elapsed": 5.0,
+        "cue": 0.0,
+        "categories_score": {
+          "violence_visual": 0.8773,
+          "audio_cue": 0.0,
+          "offensive_speech": 0.0,
+          "spam_fraud": 0.0,
+          "gambling_porn_drugs": 0.0
+        },
+        "temporal": {
+          "iou": 0.0,
+          "hit_rate": 0.0,
+          "n_gt": 2,
+          "n_pred": 1
+        }
+      },
+      {
+        "file": "Death.Proof.2007__00-45-05_00-47-36_label_B5-0-0.mp4",
+        "truth": 1,
+        "categories": [
+          "abuse"
+        ],
+        "score": 0.9316,
+        "visual": 0.9316,
+        "asr": 0.2409,
+        "ocr": 0.0,
+        "verdict": "review",
+        "labels": [
+          "gore",
+          "gore_cartoon",
+          "gore_game",
+          "gore_text_screen",
+          "horror",
+          "horror_cartoon",
+          "horror_game",
+          "nsfw"
+        ],
+        "duration": 151.1,
+        "n_frames": 48,
+        "elapsed": 12.2,
+        "cue": 0.0,
+        "categories_score": {
+          "violence_visual": 0.9316,
+          "audio_cue": 0.0,
+          "offensive_speech": 0.0,
+          "spam_fraud": 0.0,
+          "gambling_porn_drugs": 0.0
+        },
+        "temporal": {
+          "iou": 0.0,
+          "hit_rate": 0.0,
+          "n_gt": 2,
+          "n_pred": 3
+        }
+      },
+      {
+        "file": "Death.Proof.2007__01-40-41_01-42-17_label_B5-B6-0.mp4",
+        "truth": 1,
+        "categories": [
+          "abuse",
+          "car_accident"
+        ],
+        "score": 0.9878,
+        "visual": 0.9878,
+        "asr": 0.1591,
+        "ocr": 0.0,
+        "verdict": "block",
+        "labels": [
+          "gore",
+          "gore_game",
+          "porn",
+          "porn_game",
+          "violence",
+          "weapon"
+        ],
+        "duration": 96.1,
+        "n_frames": 48,
+        "elapsed": 11.7,
+        "cue": 0.0,
+        "categories_score": {
+          "violence_visual": 0.9878,
+          "audio_cue": 0.0,
+          "offensive_speech": 0.0,
+          "spam_fraud": 0.0,
+          "gambling_porn_drugs": 0.0
+        },
+        "temporal": {
+          "iou": 0.0,
+          "hit_rate": 0.0,
+          "n_gt": 2,
+          "n_pred": 4
+        }
+      },
+      {
+        "file": "Election.2005__00-47-57_00-50-54_label_B5-0-0.mp4",
+        "truth": 1,
+        "categories": [
+          "abuse"
+        ],
+        "score": 1.0,
+        "visual": 0.9667,
+        "asr": 0.8396,
+        "ocr": 0.0,
+        "verdict": "block",
+        "labels": [
+          "asr_offensive",
+          "emotion_angry",
+          "gore",
+          "weapon"
+        ],
+        "duration": 177.0,
+        "n_frames": 48,
+        "elapsed": 10.6,
+        "cue": 0.35,
+        "categories_score": {
+          "violence_visual": 0.9667,
+          "audio_cue": 0.35,
+          "offensive_speech": 0.8396,
+          "spam_fraud": 0.0,
+          "gambling_porn_drugs": 0.0
+        },
+        "temporal": {
+          "iou": 0.0266,
+          "hit_rate": 0.3333,
+          "n_gt": 3,
+          "n_pred": 4
+        }
+      },
+      {
+        "file": "Fast.Furious.6.2013__01-03-25_01-04-59_label_B1-0-0.mp4",
+        "truth": 1,
+        "categories": [
+          "fighting"
+        ],
+        "score": 0.9531,
+        "visual": 0.9531,
+        "asr": 0.2409,
+        "ocr": 0.0,
+        "verdict": "block",
+        "labels": [
+          "deepfake_suspect",
+          "violence",
+          "weapon"
+        ],
+        "duration": 94.1,
+        "n_frames": 48,
+        "elapsed": 8.1,
+        "cue": 0.0,
+        "categories_score": {
+          "violence_visual": 0.9531,
+          "audio_cue": 0.0,
+          "offensive_speech": 0.0,
+          "spam_fraud": 0.0,
+          "gambling_porn_drugs": 0.0
+        },
+        "temporal": {
+          "iou": 0.0759,
+          "hit_rate": 0.5,
+          "n_gt": 2,
+          "n_pred": 5
+        }
+      },
+      {
+        "file": "Kill.Bill.Vol.2.2004__0-25-20_0-26-20_label_B2-0-0.mp4",
+        "truth": 1,
+        "categories": [
+          "shooting"
+        ],
+        "score": 0.9849,
+        "visual": 0.938,
+        "asr": 0.0,
+        "ocr": 0.0,
+        "verdict": "block",
+        "labels": [
+          "emotion_sad",
+          "gore",
+          "horror",
+          "horror_game"
+        ],
+        "duration": 60.1,
+        "n_frames": 47,
+        "elapsed": 6.5,
+        "cue": 0.1,
+        "categories_score": {
+          "violence_visual": 0.938,
+          "audio_cue": 0.1,
+          "offensive_speech": 0.0,
+          "spam_fraud": 0.0,
+          "gambling_porn_drugs": 0.0
+        },
+        "temporal": {
+          "iou": 0.0,
+          "hit_rate": 0.0,
+          "n_gt": 1,
+          "n_pred": 6
+        }
+      },
+      {
+        "file": "Kingsman.The.Golden.Circle.2017__00-35-55_00-36-35_label_B1-0-0.mp4",
+        "truth": 1,
+        "categories": [
+          "fighting"
+        ],
+        "score": 0.9805,
+        "visual": 0.9805,
+        "asr": 0.0,
+        "ocr": 0.0,
+        "verdict": "block",
+        "labels": [
+          "violence",
+          "weapon",
+          "weapon_cartoon",
+          "weapon_game"
+        ],
+        "duration": 40.2,
+        "n_frames": 44,
+        "elapsed": 6.3,
+        "cue": 0.0,
+        "categories_score": {
+          "violence_visual": 0.9805,
+          "audio_cue": 0.0,
+          "offensive_speech": 0.0,
+          "spam_fraud": 0.0,
+          "gambling_porn_drugs": 0.0
+        },
+        "temporal": {
+          "iou": 0.0709,
+          "hit_rate": 1.0,
+          "n_gt": 1,
+          "n_pred": 7
+        }
+      },
+      {
+        "file": "Mission.Impossible.III.2006__01-06-52_01-07-15_label_G-0-0.mp4",
+        "truth": 1,
+        "categories": [
+          "explosion"
+        ],
+        "score": 0.9943,
+        "visual": 0.9943,
+        "asr": 0.0,
+        "ocr": 0.0,
+        "verdict": "block",
+        "labels": [
+          "fire_disaster",
+          "fire_disaster_cartoon",
+          "fire_disaster_game"
+        ],
+        "duration": 23.1,
+        "n_frames": 39,
+        "elapsed": 4.7,
+        "cue": 0.0,
+        "categories_score": {
+          "violence_visual": 0.9943,
+          "audio_cue": 0.0,
+          "offensive_speech": 0.0,
+          "spam_fraud": 0.0,
+          "gambling_porn_drugs": 0.0
+        },
+        "temporal": {
+          "iou": 0.4751,
+          "hit_rate": 1.0,
+          "n_gt": 1,
+          "n_pred": 2
+        }
+      },
+      {
+        "file": "Mission.Impossible.V.Rogue.Nation.2015__00-17-27_00-17-55_label_B2-0-0.mp4",
+        "truth": 1,
+        "categories": [
+          "shooting"
+        ],
+        "score": 0.9483,
+        "visual": 0.9483,
+        "asr": 0.0,
+        "ocr": 0.0,
+        "verdict": "block",
+        "labels": [
+          "porn",
+          "porn_game"
+        ],
+        "duration": 28.1,
+        "n_frames": 43,
+        "elapsed": 4.8,
+        "cue": 0.0,
+        "categories_score": {
+          "violence_visual": 0.9483,
+          "audio_cue": 0.0,
+          "offensive_speech": 0.0,
+          "spam_fraud": 0.0,
+          "gambling_porn_drugs": 0.0
+        },
+        "temporal": {
+          "iou": 0.2741,
+          "hit_rate": 1.0,
+          "n_gt": 1,
+          "n_pred": 3
+        }
+      },
+      {
+        "file": "Salt.2010__01-06-27_01-07-07_label_G-B2-0.mp4",
+        "truth": 1,
+        "categories": [
+          "explosion",
+          "shooting"
+        ],
+        "score": 1.0,
+        "visual": 0.9668,
+        "asr": 0.1591,
+        "ocr": 0.0,
+        "verdict": "block",
+        "labels": [
+          "emotion_sad",
+          "horror",
+          "horror_game",
+          "smoking_drug",
+          "weapon",
+          "weapon_game"
+        ],
+        "duration": 40.1,
+        "n_frames": 48,
+        "elapsed": 5.7,
+        "cue": 0.1,
+        "categories_score": {
+          "violence_visual": 0.9668,
+          "audio_cue": 0.1,
+          "offensive_speech": 0.0,
+          "spam_fraud": 0.0,
+          "gambling_porn_drugs": 0.0
+        },
+        "temporal": {
+          "iou": 0.0757,
+          "hit_rate": 0.4,
+          "n_gt": 5,
+          "n_pred": 5
+        }
+      },
+      {
+        "file": "Shoot.Em.Up.2007__00-53-25_00-56-47_label_B2-0-0.mp4",
+        "truth": 1,
+        "categories": [
+          "shooting"
+        ],
+        "score": 0.9522,
+        "visual": 0.9522,
+        "asr": 0.2409,
+        "ocr": 0.0,
+        "verdict": "block",
+        "labels": [
+          "fire_disaster_cartoon",
+          "gore",
+          "weapon",
+          "weapon_game"
+        ],
+        "duration": 202.1,
+        "n_frames": 48,
+        "elapsed": 10.9,
+        "cue": 0.0,
+        "categories_score": {
+          "violence_visual": 0.9522,
+          "audio_cue": 0.0,
+          "offensive_speech": 0.0,
+          "spam_fraud": 0.0,
+          "gambling_porn_drugs": 0.0
+        },
+        "temporal": {
+          "iou": 0.1419,
+          "hit_rate": 0.1429,
+          "n_gt": 7,
+          "n_pred": 7
+        }
+      },
+      {
+        "file": "Shoot.Em.Up.2007__00-56-56_00-57-15_label_B2-0-0.mp4",
+        "truth": 1,
+        "categories": [
+          "shooting"
+        ],
+        "score": 0.9625,
+        "visual": 0.9625,
+        "asr": 0.1591,
+        "ocr": 0.0,
+        "verdict": "block",
+        "labels": [
+          "fire_disaster",
+          "fire_disaster_text_screen",
+          "gore_cartoon",
+          "horror_game",
+          "porn",
+          "weapon_game"
+        ],
+        "duration": 19.1,
+        "n_frames": 38,
+        "elapsed": 4.5,
+        "cue": 0.0,
+        "categories_score": {
+          "violence_visual": 0.9625,
+          "audio_cue": 0.0,
+          "offensive_speech": 0.0,
+          "spam_fraud": 0.0,
+          "gambling_porn_drugs": 0.0
+        },
+        "temporal": {
+          "iou": 0.0101,
+          "hit_rate": 1.0,
+          "n_gt": 1,
+          "n_pred": 4
+        }
+      },
+      {
+        "file": "Sin.City.2005__0-22-04_0-22-18_label_B5-0-0.mp4",
+        "truth": 1,
+        "categories": [
+          "abuse"
+        ],
+        "score": 0.9777,
+        "visual": 0.9777,
+        "asr": 0.0,
+        "ocr": 0.0,
+        "verdict": "block",
+        "labels": [
+          "gore",
+          "gore_cartoon",
+          "porn"
+        ],
+        "duration": 14.1,
+        "n_frames": 35,
+        "elapsed": 3.7,
+        "cue": 0.0,
+        "categories_score": {
+          "violence_visual": 0.9777,
+          "audio_cue": 0.0,
+          "offensive_speech": 0.0,
+          "spam_fraud": 0.0,
+          "gambling_porn_drugs": 0.0
+        },
+        "temporal": {
+          "iou": 0.1236,
+          "hit_rate": 1.0,
+          "n_gt": 1,
+          "n_pred": 8
+        }
+      },
+      {
+        "file": "Sin.City.2005__01-51-59_01-52-29_label_B2-0-0.mp4",
+        "truth": 1,
+        "categories": [
+          "shooting"
+        ],
+        "score": 0.9238,
+        "visual": 0.9238,
+        "asr": 0.0,
+        "ocr": 0.0,
+        "verdict": "review",
+        "labels": [
+          "gore",
+          "porn",
+          "smoking_drug",
+          "smoking_drug_game",
+          "weapon"
+        ],
+        "duration": 30.1,
+        "n_frames": 43,
+        "elapsed": 5.0,
+        "cue": 0.0,
+        "categories_score": {
+          "violence_visual": 0.9238,
+          "audio_cue": 0.0,
+          "offensive_speech": 0.0,
+          "spam_fraud": 0.0,
+          "gambling_porn_drugs": 0.0
+        },
+        "temporal": {
+          "iou": 0.0,
+          "hit_rate": 0.0,
+          "n_gt": 2,
+          "n_pred": 4
+        }
+      },
+      {
+        "file": "Taken.2.UNRATED.EXTENDED.2012__00-13-42_00-14-16_label_B5-0-0.mp4",
+        "truth": 1,
+        "categories": [
+          "abuse"
+        ],
+        "score": 0.989,
+        "visual": 0.989,
+        "asr": 0.0,
+        "ocr": 0.0,
+        "verdict": "block",
+        "labels": [
+          "gore",
+          "horror",
+          "violence",
+          "weapon"
+        ],
+        "duration": 34.2,
+        "n_frames": 43,
+        "elapsed": 5.3,
+        "cue": 0.0,
+        "categories_score": {
+          "violence_visual": 0.989,
+          "audio_cue": 0.0,
+          "offensive_speech": 0.0,
+          "spam_fraud": 0.0,
+          "gambling_porn_drugs": 0.0
+        },
+        "temporal": {
+          "iou": 0.3503,
+          "hit_rate": 1.0,
+          "n_gt": 1,
+          "n_pred": 6
+        }
+      },
+      {
+        "file": "Taken.Extended.Cut.2008__00-50-45_00-51-04_label_B2-B6-0.mp4",
+        "truth": 1,
+        "categories": [
+          "shooting",
+          "car_accident"
+        ],
+        "score": 0.9314,
+        "visual": 0.9314,
+        "asr": 0.1591,
+        "ocr": 0.0,
+        "verdict": "review",
+        "labels": [
+          "fire_disaster",
+          "fire_disaster_game",
+          "horror_game",
+          "weapon"
+        ],
+        "duration": 19.1,
+        "n_frames": 40,
+        "elapsed": 4.3,
+        "cue": 0.0,
+        "categories_score": {
+          "violence_visual": 0.9314,
+          "audio_cue": 0.0,
+          "offensive_speech": 0.0,
+          "spam_fraud": 0.0,
+          "gambling_porn_drugs": 0.0
+        },
+        "temporal": {
+          "iou": 0.0,
+          "hit_rate": 0.0,
+          "n_gt": 2,
+          "n_pred": 4
+        }
+      },
+      {
+        "file": "Tropa.de.Elite.2.2010__00-42-00_00-43-00_label_B2-0-0.mp4",
+        "truth": 1,
+        "categories": [
+          "shooting"
+        ],
+        "score": 0.8895,
+        "visual": 0.8895,
+        "asr": 0.1591,
+        "ocr": 0.0,
+        "verdict": "review",
+        "labels": [
+          "deepfake_suspect",
+          "porn",
+          "protest_crowd",
+          "weapon_game"
+        ],
+        "duration": 60.1,
+        "n_frames": 44,
+        "elapsed": 6.4,
+        "cue": 0.0,
+        "categories_score": {
+          "violence_visual": 0.8895,
+          "audio_cue": 0.0,
+          "offensive_speech": 0.0,
+          "spam_fraud": 0.0,
+          "gambling_porn_drugs": 0.0
+        },
+        "temporal": {
+          "iou": 0.0,
+          "hit_rate": 0.0,
+          "n_gt": 1,
+          "n_pred": 2
+        }
+      },
+      {
+        "file": "Tropa.de.Elite.2007__00-52-33_00-54-35_label_A.mp4",
+        "truth": 0,
+        "categories": [
+          "normal"
+        ],
+        "score": 0.8681,
+        "visual": 0.8681,
+        "asr": 0.1591,
+        "ocr": 0.0,
+        "verdict": "pass",
+        "labels": [
+          "porn",
+          "smoking_drug",
+          "smoking_drug_game"
+        ],
+        "duration": 122.2,
+        "n_frames": 46,
+        "elapsed": 9.3,
+        "cue": 0.0,
+        "categories_score": {
+          "violence_visual": 0.8681,
+          "audio_cue": 0.0,
+          "offensive_speech": 0.0,
+          "spam_fraud": 0.0,
+          "gambling_porn_drugs": 0.0
+        }
+      },
+      {
+        "file": "Yellow.Sea.2010__00-10-16_00-11-14_label_A.mp4",
+        "truth": 0,
+        "categories": [
+          "normal"
+        ],
+        "score": 0.9232,
+        "visual": 0.9232,
+        "asr": 0.1591,
+        "ocr": 0.0,
+        "verdict": "review",
+        "labels": [
+          "fire_disaster",
+          "protest_crowd",
+          "protest_crowd_game",
+          "smoking_drug"
+        ],
+        "duration": 58.1,
+        "n_frames": 48,
+        "elapsed": 6.3,
+        "cue": 0.0,
+        "categories_score": {
+          "violence_visual": 0.9232,
+          "audio_cue": 0.0,
+          "offensive_speech": 0.0,
+          "spam_fraud": 0.0,
+          "gambling_porn_drugs": 0.0
+        }
+      },
+      {
+        "file": "Yellow.Sea.2010__01-58-30_01-59-27_label_B5-0-0.mp4",
+        "truth": 1,
+        "categories": [
+          "abuse"
+        ],
+        "score": 0.9659,
+        "visual": 0.9659,
+        "asr": 0.1591,
+        "ocr": 0.0,
+        "verdict": "block",
+        "labels": [
+          "gore",
+          "horror",
+          "violence",
+          "weapon",
+          "weapon_game"
+        ],
+        "duration": 57.1,
+        "n_frames": 48,
+        "elapsed": 6.0,
+        "cue": 0.0,
+        "categories_score": {
+          "violence_visual": 0.9659,
+          "audio_cue": 0.0,
+          "offensive_speech": 0.0,
+          "spam_fraud": 0.0,
+          "gambling_porn_drugs": 0.0
+        },
+        "temporal": {
+          "iou": 0.0091,
+          "hit_rate": 1.0,
+          "n_gt": 1,
+          "n_pred": 10
+        }
+      },
+      {
+        "file": "Young.And.Dangerous.I.1996__0-55-09_0-56-59_label_A.mp4",
+        "truth": 0,
+        "categories": [
+          "normal"
+        ],
+        "score": 0.9894,
+        "visual": 0.842,
+        "asr": 0.4648,
+        "ocr": 0.1823,
+        "verdict": "block",
+        "labels": [
+          "emotion_angry",
+          "gore",
+          "gore_cartoon",
+          "gore_game",
+          "gore_text_screen",
+          "weapon"
+        ],
+        "duration": 110.1,
+        "n_frames": 48,
+        "elapsed": 10.0,
+        "cue": 0.35,
+        "categories_score": {
+          "violence_visual": 0.842,
+          "audio_cue": 0.35,
+          "offensive_speech": 0.0,
+          "spam_fraud": 0.0,
+          "gambling_porn_drugs": 0.0
+        }
+      },
+      {
+        "file": "Young.And.Dangerous.IV.1997__01-07-50_01-09-45_label_B1-0-0.mp4",
+        "truth": 1,
+        "categories": [
+          "fighting"
+        ],
+        "score": 0.9917,
+        "visual": 0.9917,
+        "asr": 0.1591,
+        "ocr": 0.0,
+        "verdict": "block",
+        "labels": [
+          "gore",
+          "violence",
+          "violence_game"
+        ],
+        "duration": 115.1,
+        "n_frames": 48,
+        "elapsed": 9.8,
+        "cue": 0.0,
+        "categories_score": {
+          "violence_visual": 0.9917,
+          "audio_cue": 0.0,
+          "offensive_speech": 0.0,
+          "spam_fraud": 0.0,
+          "gambling_porn_drugs": 0.0
+        },
+        "temporal": {
+          "iou": 0.2983,
+          "hit_rate": 1.0,
+          "n_gt": 1,
+          "n_pred": 10
+        }
+      },
+      {
+        "file": "Your.Name.2016__01-01-20_01-04-00_label_A.mp4",
+        "truth": 0,
+        "categories": [
+          "normal"
+        ],
+        "score": 0.6132,
+        "visual": 0.6132,
+        "asr": 0.1728,
+        "ocr": 0.0,
+        "verdict": "pass",
+        "labels": [
+          "fire_disaster_cartoon",
+          "gore_cartoon",
+          "gore_game",
+          "porn_cartoon",
+          "weapon_cartoon"
+        ],
+        "duration": 160.1,
+        "n_frames": 36,
+        "elapsed": 10.0,
+        "cue": 0.0,
+        "categories_score": {
+          "violence_visual": 0.6132,
+          "audio_cue": 0.0,
+          "offensive_speech": 0.0,
+          "spam_fraud": 0.0,
+          "gambling_porn_drugs": 0.0
+        }
+      },
+      {
+        "file": "v=-fOWSLV6Esw__1_label_B4-0-0.mp4",
+        "truth": 1,
+        "categories": [
+          "riot"
+        ],
+        "score": 0.9894,
+        "visual": 0.9894,
+        "asr": 0.1591,
+        "ocr": 0.0,
+        "verdict": "block",
+        "labels": [
+          "gore_text_screen",
+          "protest_crowd",
+          "violence"
+        ],
+        "duration": 32.9,
+        "n_frames": 45,
+        "elapsed": 8.3,
+        "cue": 0.0,
+        "categories_score": {
+          "violence_visual": 0.9894,
+          "audio_cue": 0.0,
+          "offensive_speech": 0.0,
+          "spam_fraud": 0.0,
+          "gambling_porn_drugs": 0.0
+        },
+        "temporal": {
+          "iou": 0.6996,
+          "hit_rate": 1.0,
+          "n_gt": 1,
+          "n_pred": 4
+        }
+      },
+      {
+        "file": "v=1djrJ0wxlYo__1_label_B4-0-0.mp4",
+        "truth": 1,
+        "categories": [
+          "riot"
+        ],
+        "score": 0.9973,
+        "visual": 0.9973,
+        "asr": 0.1591,
+        "ocr": 0.0,
+        "verdict": "block",
+        "labels": [
+          "protest_crowd"
+        ],
+        "duration": 64.0,
+        "n_frames": 44,
+        "elapsed": 8.9,
+        "cue": 0.0,
+        "categories_score": {
+          "violence_visual": 0.9973,
+          "audio_cue": 0.0,
+          "offensive_speech": 0.0,
+          "spam_fraud": 0.0,
+          "gambling_porn_drugs": 0.0
+        },
+        "temporal": {
+          "iou": 0.6896,
+          "hit_rate": 1.0,
+          "n_gt": 2,
+          "n_pred": 3
+        }
+      },
+      {
+        "file": "v=2JJ9d97sd64__1_label_A.mp4",
+        "truth": 0,
+        "categories": [
+          "normal"
+        ],
+        "score": 0.9239,
+        "visual": 0.9239,
+        "asr": 0.2409,
+        "ocr": 0.0,
+        "verdict": "review",
+        "labels": [
+          "gore",
+          "gore_cartoon",
+          "gore_text_screen",
+          "nsfw_cartoon",
+          "porn",
+          "protest_crowd"
+        ],
+        "duration": 130.8,
+        "n_frames": 48,
+        "elapsed": 10.7,
+        "cue": 0.0,
+        "categories_score": {
+          "violence_visual": 0.9239,
+          "audio_cue": 0.0,
+          "offensive_speech": 0.0,
+          "spam_fraud": 0.0,
+          "gambling_porn_drugs": 0.0
+        }
+      },
+      {
+        "file": "v=3MUqt3OkxIo__1_label_A.mp4",
+        "truth": 0,
+        "categories": [
+          "normal"
+        ],
+        "score": 0.6715,
+        "visual": 0.6715,
+        "asr": 0.2409,
+        "ocr": 0.0,
+        "verdict": "pass",
+        "labels": [
+          "deepfake_suspect",
+          "gore_game",
+          "porn",
+          "porn_game"
+        ],
+        "duration": 104.2,
+        "n_frames": 38,
+        "elapsed": 10.6,
+        "cue": 0.0,
+        "categories_score": {
+          "violence_visual": 0.6715,
+          "audio_cue": 0.0,
+          "offensive_speech": 0.0,
+          "spam_fraud": 0.0,
+          "gambling_porn_drugs": 0.0
+        }
+      },
+      {
+        "file": "v=3wxWNAM8Cso__1_label_G-0-0.mp4",
+        "truth": 1,
+        "categories": [
+          "explosion"
+        ],
+        "score": 0.9182,
+        "visual": 0.8745,
+        "asr": 0.2409,
+        "ocr": 0.0,
+        "verdict": "review",
+        "labels": [
+          "emotion_sad",
+          "fire_disaster",
+          "fire_disaster_cartoon",
+          "fire_disaster_game",
+          "gore_cartoon",
+          "nsfw_cartoon",
+          "weapon_cartoon"
+        ],
+        "duration": 252.6,
+        "n_frames": 48,
+        "elapsed": 14.4,
+        "cue": 0.1,
+        "categories_score": {
+          "violence_visual": 0.8745,
+          "audio_cue": 0.1,
+          "offensive_speech": 0.0,
+          "spam_fraud": 0.0,
+          "gambling_porn_drugs": 0.0
+        },
+        "temporal": {
+          "iou": 0.0,
+          "hit_rate": 0.0,
+          "n_gt": 2,
+          "n_pred": 1
+        }
+      },
+      {
+        "file": "v=6cvZOGzfqWU__1_label_A.mp4",
+        "truth": 0,
+        "categories": [
+          "normal"
+        ],
+        "score": 0.8984,
+        "visual": 0.8984,
+        "asr": 0.1591,
+        "ocr": 0.0,
+        "verdict": "review",
+        "labels": [
+          "weapon",
+          "weapon_cartoon",
+          "weapon_text_screen"
+        ],
+        "duration": 233.1,
+        "n_frames": 48,
+        "elapsed": 14.2,
+        "cue": 0.0,
+        "categories_score": {
+          "violence_visual": 0.8984,
+          "audio_cue": 0.0,
+          "offensive_speech": 0.0,
+          "spam_fraud": 0.0,
+          "gambling_porn_drugs": 0.0
+        }
+      },
+      {
+        "file": "v=9CWJd1SezkA__1_label_G-0-0.mp4",
+        "truth": 1,
+        "categories": [
+          "explosion"
+        ],
+        "score": 0.988,
+        "visual": 0.988,
+        "asr": 0.0,
+        "ocr": 0.0,
+        "verdict": "block",
+        "labels": [
+          "fire_disaster",
+          "fire_disaster_game"
+        ],
+        "duration": 29.2,
+        "n_frames": 45,
+        "elapsed": 4.6,
+        "cue": 0.0,
+        "categories_score": {
+          "violence_visual": 0.988,
+          "audio_cue": 0.0,
+          "offensive_speech": 0.0,
+          "spam_fraud": 0.0,
+          "gambling_porn_drugs": 0.0
+        },
+        "temporal": {
+          "iou": 0.7312,
+          "hit_rate": 1.0,
+          "n_gt": 1,
+          "n_pred": 1
+        }
+      },
+      {
+        "file": "v=BzwNU2xmT64__00-01-00_00-02-45_label_B6-0-0.mp4",
+        "truth": 1,
+        "categories": [
+          "car_accident"
+        ],
+        "score": 0.9612,
+        "visual": 0.9612,
+        "asr": 0.1591,
+        "ocr": 0.0,
+        "verdict": "block",
+        "labels": [
+          "fire_disaster",
+          "fire_disaster_cartoon",
+          "gore",
+          "gore_cartoon",
+          "protest_crowd"
+        ],
+        "duration": 105.1,
+        "n_frames": 48,
+        "elapsed": 10.0,
+        "cue": 0.0,
+        "categories_score": {
+          "violence_visual": 0.9612,
+          "audio_cue": 0.0,
+          "offensive_speech": 0.0,
+          "spam_fraud": 0.0,
+          "gambling_porn_drugs": 0.0
+        },
+        "temporal": {
+          "iou": 0.0765,
+          "hit_rate": 0.1667,
+          "n_gt": 6,
+          "n_pred": 5
+        }
+      },
+      {
+        "file": "v=GbMQ2CxeNHU__1_label_B4-0-0.mp4",
+        "truth": 1,
+        "categories": [
+          "riot"
+        ],
+        "score": 1.0,
+        "visual": 0.9969,
+        "asr": 0.2409,
+        "ocr": 0.0,
+        "verdict": "block",
+        "labels": [
+          "emotion_angry",
+          "fire_disaster",
+          "fire_disaster_cartoon",
+          "protest_crowd"
+        ],
+        "duration": 228.8,
+        "n_frames": 48,
+        "elapsed": 15.2,
+        "cue": 0.35,
+        "categories_score": {
+          "violence_visual": 0.9969,
+          "audio_cue": 0.35,
+          "offensive_speech": 0.0,
+          "spam_fraud": 0.0,
+          "gambling_porn_drugs": 0.0
+        },
+        "temporal": {
+          "iou": 0.238,
+          "hit_rate": 1.0,
+          "n_gt": 1,
+          "n_pred": 10
+        }
+      },
+      {
+        "file": "v=H9Y5_X1sEEA__00-45-00_00-48-00_label_A.mp4",
+        "truth": 0,
+        "categories": [
+          "normal"
+        ],
+        "score": 0.8662,
+        "visual": 0.8662,
+        "asr": 0.1591,
+        "ocr": 0.0,
+        "verdict": "pass",
+        "labels": [
+          "fire_disaster"
+        ],
+        "duration": 180.1,
+        "n_frames": 48,
+        "elapsed": 14.4,
+        "cue": 0.0,
+        "categories_score": {
+          "violence_visual": 0.8662,
+          "audio_cue": 0.0,
+          "offensive_speech": 0.0,
+          "spam_fraud": 0.0,
+          "gambling_porn_drugs": 0.0
+        }
+      },
+      {
+        "file": "v=HSisjzLESak__00-07-40_00-08-50_label_B6-0-0.mp4",
+        "truth": 1,
+        "categories": [
+          "car_accident"
+        ],
+        "score": 0.9797,
+        "visual": 0.9331,
+        "asr": 0.1591,
+        "ocr": 0.0,
+        "verdict": "block",
+        "labels": [
+          "emotion_sad",
+          "fire_disaster",
+          "horror",
+          "protest_crowd",
+          "protest_crowd_cartoon"
+        ],
+        "duration": 70.1,
+        "n_frames": 46,
+        "elapsed": 10.5,
+        "cue": 0.1,
+        "categories_score": {
+          "violence_visual": 0.9331,
+          "audio_cue": 0.1,
+          "offensive_speech": 0.0,
+          "spam_fraud": 0.0,
+          "gambling_porn_drugs": 0.0
+        },
+        "temporal": {
+          "iou": 0.3123,
+          "hit_rate": 1.0,
+          "n_gt": 2,
+          "n_pred": 4
+        }
+      },
+      {
+        "file": "v=IWzI9V3WSnc__1_label_B4-0-0.mp4",
+        "truth": 1,
+        "categories": [
+          "riot"
+        ],
+        "score": 0.9971,
+        "visual": 0.9971,
+        "asr": 0.1591,
+        "ocr": 0.0,
+        "verdict": "block",
+        "labels": [
+          "fire_disaster",
+          "fire_disaster_game",
+          "protest_crowd"
+        ],
+        "duration": 112.0,
+        "n_frames": 47,
+        "elapsed": 9.6,
+        "cue": 0.0,
+        "categories_score": {
+          "violence_visual": 0.9971,
+          "audio_cue": 0.0,
+          "offensive_speech": 0.0,
+          "spam_fraud": 0.0,
+          "gambling_porn_drugs": 0.0
+        },
+        "temporal": {
+          "iou": 0.8172,
+          "hit_rate": 1.0,
+          "n_gt": 1,
+          "n_pred": 3
+        }
+      },
+      {
+        "file": "v=JzrpCC7XmyE__01-06-00_01-12-00_label_A.mp4",
+        "truth": 0,
+        "categories": [
+          "normal"
+        ],
+        "score": 0.9025,
+        "visual": 0.9025,
+        "asr": 0.2409,
+        "ocr": 0.0,
+        "verdict": "review",
+        "labels": [
+          "protest_crowd",
+          "protest_crowd_game"
+        ],
+        "duration": 360.1,
+        "n_frames": 48,
+        "elapsed": 21.9,
+        "cue": 0.0,
+        "categories_score": {
+          "violence_visual": 0.9025,
+          "audio_cue": 0.0,
+          "offensive_speech": 0.0,
+          "spam_fraud": 0.0,
+          "gambling_porn_drugs": 0.0
+        }
+      },
+      {
+        "file": "v=KUeUxbsBO6s__1_label_B1-0-0.mp4",
+        "truth": 1,
+        "categories": [
+          "fighting"
+        ],
+        "score": 0.9671,
+        "visual": 0.9671,
+        "asr": 0.2409,
+        "ocr": 0.2409,
+        "verdict": "block",
+        "labels": [
+          "gore",
+          "gore_text_screen",
+          "violence"
+        ],
+        "duration": 114.5,
+        "n_frames": 44,
+        "elapsed": 12.7,
+        "cue": 0.0,
+        "categories_score": {
+          "violence_visual": 0.9671,
+          "audio_cue": 0.0,
+          "offensive_speech": 0.0,
+          "spam_fraud": 0.0,
+          "gambling_porn_drugs": 0.0
+        },
+        "temporal": {
+          "iou": 0.698,
+          "hit_rate": 1.0,
+          "n_gt": 1,
+          "n_pred": 2
+        }
+      },
+      {
+        "file": "v=PRH5rYUHoVU__00-00-25_00-02-50_label_B6-0-0.mp4",
+        "truth": 1,
+        "categories": [
+          "car_accident"
+        ],
+        "score": 0.9359,
+        "visual": 0.9359,
+        "asr": 0.1881,
+        "ocr": 0.0,
+        "verdict": "review",
+        "labels": [
+          "fire_disaster",
+          "gore",
+          "protest_crowd"
+        ],
+        "duration": 145.0,
+        "n_frames": 48,
+        "elapsed": 11.6,
+        "cue": 0.0,
+        "categories_score": {
+          "violence_visual": 0.9359,
+          "audio_cue": 0.0,
+          "offensive_speech": 0.0,
+          "spam_fraud": 0.0,
+          "gambling_porn_drugs": 0.0
+        }
+      },
+      {
+        "file": "v=SmFpAAHmoII__1_label_A.mp4",
+        "truth": 0,
+        "categories": [
+          "normal"
+        ],
+        "score": 0.9313,
+        "visual": 0.9313,
+        "asr": 0.2409,
+        "ocr": 0.0,
+        "verdict": "review",
+        "labels": [
+          "gore",
+          "gore_game",
+          "gore_text_screen",
+          "violence",
+          "violence_game"
+        ],
+        "duration": 164.6,
+        "n_frames": 48,
+        "elapsed": 12.4,
+        "cue": 0.0,
+        "categories_score": {
+          "violence_visual": 0.9313,
+          "audio_cue": 0.0,
+          "offensive_speech": 0.0,
+          "spam_fraud": 0.0,
+          "gambling_porn_drugs": 0.0
+        }
+      },
+      {
+        "file": "v=VNQ1Vkz_cM4__1_label_A.mp4",
+        "truth": 0,
+        "categories": [
+          "normal"
+        ],
+        "score": 0.8104,
+        "visual": 0.8104,
+        "asr": 0.2409,
+        "ocr": 0.0,
+        "verdict": "pass",
+        "labels": [
+          "gore",
+          "gore_cartoon"
+        ],
+        "duration": 234.2,
+        "n_frames": 48,
+        "elapsed": 15.4,
+        "cue": 0.0,
+        "categories_score": {
+          "violence_visual": 0.8104,
+          "audio_cue": 0.0,
+          "offensive_speech": 0.0,
+          "spam_fraud": 0.0,
+          "gambling_porn_drugs": 0.0
+        }
+      },
+      {
+        "file": "v=X4I8FhpGJwo__00-09-00_00-10-45_label_B6-0-0.mp4",
+        "truth": 1,
+        "categories": [
+          "car_accident"
+        ],
+        "score": 0.9059,
+        "visual": 0.8627,
+        "asr": 0.1591,
+        "ocr": 0.0,
+        "verdict": "review",
+        "labels": [
+          "emotion_sad",
+          "protest_crowd"
+        ],
+        "duration": 105.1,
+        "n_frames": 46,
+        "elapsed": 12.1,
+        "cue": 0.1,
+        "categories_score": {
+          "violence_visual": 0.8627,
+          "audio_cue": 0.1,
+          "offensive_speech": 0.0,
+          "spam_fraud": 0.0,
+          "gambling_porn_drugs": 0.0
+        },
+        "temporal": {
+          "iou": 0.0,
+          "hit_rate": 0.0,
+          "n_gt": 6,
+          "n_pred": 1
+        }
+      },
+      {
+        "file": "v=Y43UkfAe_bc__00-00-00_00-01-40_label_B4-0-0.mp4",
+        "truth": 1,
+        "categories": [
+          "riot"
+        ],
+        "score": 1.0,
+        "visual": 0.9959,
+        "asr": 0.6638,
+        "ocr": 0.0,
+        "verdict": "block",
+        "labels": [
+          "asr_offensive",
+          "protest_crowd"
+        ],
+        "duration": 100.1,
+        "n_frames": 48,
+        "elapsed": 12.1,
+        "cue": 0.0,
+        "categories_score": {
+          "violence_visual": 0.9959,
+          "audio_cue": 0.0,
+          "offensive_speech": 0.6638,
+          "spam_fraud": 0.0,
+          "gambling_porn_drugs": 0.0
+        },
+        "temporal": {
+          "iou": 0.9677,
+          "hit_rate": 1.0,
+          "n_gt": 1,
+          "n_pred": 1
+        }
+      },
+      {
+        "file": "v=afhttnv46Y4__1_label_B1-0-0.mp4",
+        "truth": 1,
+        "categories": [
+          "fighting"
+        ],
+        "score": 0.9848,
+        "visual": 0.9848,
+        "asr": 0.2409,
+        "ocr": 0.2409,
+        "verdict": "block",
+        "labels": [
+          "gore",
+          "gore_game",
+          "gore_text_screen",
+          "porn",
+          "violence",
+          "violence_game"
+        ],
+        "duration": 104.2,
+        "n_frames": 48,
+        "elapsed": 12.3,
+        "cue": 0.0,
+        "categories_score": {
+          "violence_visual": 0.9848,
+          "audio_cue": 0.0,
+          "offensive_speech": 0.0,
+          "spam_fraud": 0.0,
+          "gambling_porn_drugs": 0.0
+        },
+        "temporal": {
+          "iou": 0.0602,
+          "hit_rate": 1.0,
+          "n_gt": 2,
+          "n_pred": 7
+        }
+      },
+      {
+        "file": "v=bfOlheR5nUQ__00-04-33_00-06-02_label_B4-0-0.mp4",
+        "truth": 1,
+        "categories": [
+          "riot"
+        ],
+        "score": 0.9539,
+        "visual": 0.9539,
+        "asr": 0.1591,
+        "ocr": 0.0,
+        "verdict": "block",
+        "labels": [
+          "protest_crowd",
+          "weapon"
+        ],
+        "duration": 89.1,
+        "n_frames": 48,
+        "elapsed": 8.3,
+        "cue": 0.0,
+        "categories_score": {
+          "violence_visual": 0.9539,
+          "audio_cue": 0.0,
+          "offensive_speech": 0.0,
+          "spam_fraud": 0.0,
+          "gambling_porn_drugs": 0.0
+        },
+        "temporal": {
+          "iou": 0.0254,
+          "hit_rate": 1.0,
+          "n_gt": 1,
+          "n_pred": 7
+        }
+      },
+      {
+        "file": "v=bhZs3ALdL7Y__1_label_G-0-0.mp4",
+        "truth": 1,
+        "categories": [
+          "explosion"
+        ],
+        "score": 0.8117,
+        "visual": 0.8117,
+        "asr": 0.1591,
+        "ocr": 0.0,
+        "verdict": "pass",
+        "labels": [
+          "fire_disaster",
+          "fire_disaster_cartoon"
+        ],
+        "duration": 3.4,
+        "n_frames": 8,
+        "elapsed": 1.6,
+        "cue": 0.0,
+        "categories_score": {
+          "violence_visual": 0.8117,
+          "audio_cue": 0.0,
+          "offensive_speech": 0.0,
+          "spam_fraud": 0.0,
+          "gambling_porn_drugs": 0.0
+        },
+        "temporal": {
+          "iou": 0.0,
+          "hit_rate": 0.0,
+          "n_gt": 1,
+          "n_pred": 0
+        }
+      },
+      {
+        "file": "v=f6j3YWgVBto__00-01-50_00-02-30_label_A.mp4",
+        "truth": 0,
+        "categories": [
+          "normal"
+        ],
+        "score": 0.28,
+        "visual": 0.28,
+        "asr": 0.1591,
+        "ocr": 0.0,
+        "verdict": "pass",
+        "labels": [
+          "fire_disaster_game",
+          "gore_game",
+          "protest_crowd_game"
+        ],
+        "duration": 40.0,
+        "n_frames": 23,
+        "elapsed": 7.1,
+        "cue": 0.0,
+        "categories_score": {
+          "violence_visual": 0.28,
+          "audio_cue": 0.0,
+          "offensive_speech": 0.0,
+          "spam_fraud": 0.0,
+          "gambling_porn_drugs": 0.0
+        }
+      },
+      {
+        "file": "v=fkps18H3SXY__00-36-00_00-42-00_label_A.mp4",
+        "truth": 0,
+        "categories": [
+          "normal"
+        ],
+        "score": 0.8891,
+        "visual": 0.8891,
+        "asr": 0.1591,
+        "ocr": 0.0,
+        "verdict": "review",
+        "labels": [
+          "protest_crowd",
+          "protest_crowd_cartoon",
+          "protest_crowd_game"
+        ],
+        "duration": 360.1,
+        "n_frames": 48,
+        "elapsed": 20.7,
+        "cue": 0.0,
+        "categories_score": {
+          "violence_visual": 0.8891,
+          "audio_cue": 0.0,
+          "offensive_speech": 0.0,
+          "spam_fraud": 0.0,
+          "gambling_porn_drugs": 0.0
+        }
+      },
+      {
+        "file": "v=ibYV3e17R5c__1_label_A.mp4",
+        "truth": 0,
+        "categories": [
+          "normal"
+        ],
+        "score": 0.9273,
+        "visual": 0.9273,
+        "asr": 0.2409,
+        "ocr": 0.0,
+        "verdict": "review",
+        "labels": [
+          "fire_disaster",
+          "gore_cartoon",
+          "porn",
+          "protest_crowd_text_screen",
+          "violence"
+        ],
+        "duration": 140.6,
+        "n_frames": 48,
+        "elapsed": 11.0,
+        "cue": 0.0,
+        "categories_score": {
+          "violence_visual": 0.9273,
+          "audio_cue": 0.0,
+          "offensive_speech": 0.0,
+          "spam_fraud": 0.0,
+          "gambling_porn_drugs": 0.0
+        }
+      },
+      {
+        "file": "v=k7R_Qo-BiAw__00-10-30_00-10-51_label_B6-0-0.mp4",
+        "truth": 1,
+        "categories": [
+          "car_accident"
+        ],
+        "score": 0.9827,
+        "visual": 0.9827,
+        "asr": 0.1591,
+        "ocr": 0.0,
+        "verdict": "block",
+        "labels": [
+          "fire_disaster",
+          "horror",
+          "protest_crowd"
+        ],
+        "duration": 21.1,
+        "n_frames": 45,
+        "elapsed": 6.0,
+        "cue": 0.0,
+        "categories_score": {
+          "violence_visual": 0.9827,
+          "audio_cue": 0.0,
+          "offensive_speech": 0.0,
+          "spam_fraud": 0.0,
+          "gambling_porn_drugs": 0.0
+        },
+        "temporal": {
+          "iou": 0.7119,
+          "hit_rate": 1.0,
+          "n_gt": 2,
+          "n_pred": 3
+        }
+      },
+      {
+        "file": "v=n0AhGnEjako__1_label_A.mp4",
+        "truth": 0,
+        "categories": [
+          "normal"
+        ],
+        "score": 0.8605,
+        "visual": 0.8605,
+        "asr": 0.1591,
+        "ocr": 0.0,
+        "verdict": "pass",
+        "labels": [
+          "nsfw_cartoon",
+          "weapon"
+        ],
+        "duration": 99.1,
+        "n_frames": 48,
+        "elapsed": 9.0,
+        "cue": 0.0,
+        "categories_score": {
+          "violence_visual": 0.8605,
+          "audio_cue": 0.0,
+          "offensive_speech": 0.0,
+          "spam_fraud": 0.0,
+          "gambling_porn_drugs": 0.0
+        }
+      },
+      {
+        "file": "v=nLAapCIlr-o__00-08-35_00-10-25_label_B6-0-0.mp4",
+        "truth": 1,
+        "categories": [
+          "car_accident"
+        ],
+        "score": 0.9565,
+        "visual": 0.9565,
+        "asr": 0.1591,
+        "ocr": 0.0,
+        "verdict": "block",
+        "labels": [
+          "fire_disaster",
+          "protest_crowd",
+          "protest_crowd_game"
+        ],
+        "duration": 110.1,
+        "n_frames": 45,
+        "elapsed": 9.7,
+        "cue": 0.0,
+        "categories_score": {
+          "violence_visual": 0.9565,
+          "audio_cue": 0.0,
+          "offensive_speech": 0.0,
+          "spam_fraud": 0.0,
+          "gambling_porn_drugs": 0.0
+        },
+        "temporal": {
+          "iou": 0.2491,
+          "hit_rate": 0.5,
+          "n_gt": 6,
+          "n_pred": 7
+        }
+      },
+      {
+        "file": "v=pFamvR9CpYw__00-00-00_00-06-36_label_B4-0-0.mp4",
+        "truth": 1,
+        "categories": [
+          "riot"
+        ],
+        "score": 0.9963,
+        "visual": 0.9963,
+        "asr": 0.2409,
+        "ocr": 0.0,
+        "verdict": "block",
+        "labels": [
+          "fire_disaster",
+          "fire_disaster_text_screen",
+          "protest_crowd",
+          "protest_crowd_text_screen",
+          "violence"
+        ],
+        "duration": 396.1,
+        "n_frames": 48,
+        "elapsed": 21.9,
+        "cue": 0.0,
+        "categories_score": {
+          "violence_visual": 0.9963,
+          "audio_cue": 0.0,
+          "offensive_speech": 0.0,
+          "spam_fraud": 0.0,
+          "gambling_porn_drugs": 0.0
+        },
+        "temporal": {
+          "iou": 0.086,
+          "hit_rate": 0.4,
+          "n_gt": 5,
+          "n_pred": 6
+        }
+      },
+      {
+        "file": "v=qyTGi0N4OVg__1_label_G-0-0.mp4",
+        "truth": 1,
+        "categories": [
+          "explosion"
+        ],
+        "score": 1.0,
+        "visual": 0.9926,
+        "asr": 0.0,
+        "ocr": 0.0,
+        "verdict": "block",
+        "labels": [
+          "emotion_sad",
+          "fire_disaster",
+          "gore",
+          "protest_crowd"
+        ],
+        "duration": 52.0,
+        "n_frames": 47,
+        "elapsed": 6.6,
+        "cue": 0.1,
+        "categories_score": {
+          "violence_visual": 0.9926,
+          "audio_cue": 0.1,
+          "offensive_speech": 0.0,
+          "spam_fraud": 0.0,
+          "gambling_porn_drugs": 0.0
+        },
+        "temporal": {
+          "iou": 0.4113,
+          "hit_rate": 1.0,
+          "n_gt": 1,
+          "n_pred": 2
+        }
+      },
+      {
+        "file": "v=tP19WuyY3IY__00-06-10_00-07-51_label_B6-0-0.mp4",
+        "truth": 1,
+        "categories": [
+          "car_accident"
+        ],
+        "score": 0.9512,
+        "visual": 0.9512,
+        "asr": 0.2409,
+        "ocr": 0.0,
+        "verdict": "block",
+        "labels": [
+          "fire_disaster",
+          "gore",
+          "protest_crowd",
+          "weapon"
+        ],
+        "duration": 101.1,
+        "n_frames": 48,
+        "elapsed": 10.4,
+        "cue": 0.0,
+        "categories_score": {
+          "violence_visual": 0.9512,
+          "audio_cue": 0.0,
+          "offensive_speech": 0.0,
+          "spam_fraud": 0.0,
+          "gambling_porn_drugs": 0.0
+        },
+        "temporal": {
+          "iou": 0.07,
+          "hit_rate": 0.5,
+          "n_gt": 2,
+          "n_pred": 7
+        }
+      },
+      {
+        "file": "v=t_TZYpT6xjY__1_label_A.mp4",
+        "truth": 0,
+        "categories": [
+          "normal"
+        ],
+        "score": 0.9462,
+        "visual": 0.9462,
+        "asr": 0.2409,
+        "ocr": 0.0,
+        "verdict": "block",
+        "labels": [
+          "gore",
+          "gore_game",
+          "gore_text_screen",
+          "horror"
+        ],
+        "duration": 197.5,
+        "n_frames": 48,
+        "elapsed": 14.6,
+        "cue": 0.0,
+        "categories_score": {
+          "violence_visual": 0.9462,
+          "audio_cue": 0.0,
+          "offensive_speech": 0.0,
+          "spam_fraud": 0.0,
+          "gambling_porn_drugs": 0.0
+        }
+      },
+      {
+        "file": "v=tlFJIG9mTGQ__00-15-00_00-18-36_label_A.mp4",
+        "truth": 0,
+        "categories": [
+          "normal"
+        ],
+        "score": 0.8716,
+        "visual": 0.8716,
+        "asr": 0.2409,
+        "ocr": 0.0,
+        "verdict": "pass",
+        "labels": [
+          "protest_crowd"
+        ],
+        "duration": 216.1,
+        "n_frames": 48,
+        "elapsed": 14.2,
+        "cue": 0.0,
+        "categories_score": {
+          "violence_visual": 0.8716,
+          "audio_cue": 0.0,
+          "offensive_speech": 0.0,
+          "spam_fraud": 0.0,
+          "gambling_porn_drugs": 0.0
+        }
+      },
+      {
+        "file": "v=usAvzbDq6-c__00-18-00_00-21-00_label_A.mp4",
+        "truth": 0,
+        "categories": [
+          "normal"
+        ],
+        "score": 0.8766,
+        "visual": 0.8766,
+        "asr": 0.2409,
+        "ocr": 0.0,
+        "verdict": "pass",
+        "labels": [
+          "gore_text_screen",
+          "protest_crowd"
+        ],
+        "duration": 180.1,
+        "n_frames": 48,
+        "elapsed": 12.8,
+        "cue": 0.0,
+        "categories_score": {
+          "violence_visual": 0.8766,
+          "audio_cue": 0.0,
+          "offensive_speech": 0.0,
+          "spam_fraud": 0.0,
+          "gambling_porn_drugs": 0.0
+        }
+      },
+      {
+        "file": "v=vQ9AwVrM9pU__1_label_A.mp4",
+        "truth": 0,
+        "categories": [
+          "normal"
+        ],
+        "score": 0.7397,
+        "visual": 0.7397,
+        "asr": 0.1591,
+        "ocr": 0.0,
+        "verdict": "pass",
+        "labels": [
+          "deepfake_suspect",
+          "protest_crowd",
+          "weapon"
+        ],
+        "duration": 130.8,
+        "n_frames": 46,
+        "elapsed": 11.3,
+        "cue": 0.0,
+        "categories_score": {
+          "violence_visual": 0.7397,
+          "audio_cue": 0.0,
+          "offensive_speech": 0.0,
+          "spam_fraud": 0.0,
+          "gambling_porn_drugs": 0.0
+        }
+      },
+      {
+        "file": "v=wG-2t0M8CPc__1_label_B1-0-0.mp4",
+        "truth": 1,
+        "categories": [
+          "fighting"
+        ],
+        "score": 0.9745,
+        "visual": 0.9745,
+        "asr": 0.2409,
+        "ocr": 0.2409,
+        "verdict": "block",
+        "labels": [
+          "gore",
+          "gore_cartoon",
+          "gore_text_screen",
+          "violence",
+          "violence_text_screen"
+        ],
+        "duration": 86.4,
+        "n_frames": 44,
+        "elapsed": 10.9,
+        "cue": 0.0,
+        "categories_score": {
+          "violence_visual": 0.9745,
+          "audio_cue": 0.0,
+          "offensive_speech": 0.0,
+          "spam_fraud": 0.0,
+          "gambling_porn_drugs": 0.0
+        },
+        "temporal": {
+          "iou": 0.4981,
+          "hit_rate": 1.0,
+          "n_gt": 2,
+          "n_pred": 3
+        }
+      },
+      {
+        "file": "v=x0-z4h6mFoU__1_label_A.mp4",
+        "truth": 0,
+        "categories": [
+          "normal"
+        ],
+        "score": 0.9175,
+        "visual": 0.9175,
+        "asr": 0.2409,
+        "ocr": 0.2409,
+        "verdict": "review",
+        "labels": [
+          "gore",
+          "gore_game",
+          "gore_text_screen",
+          "porn_text_screen"
+        ],
+        "duration": 192.1,
+        "n_frames": 48,
+        "elapsed": 16.8,
+        "cue": 0.0,
+        "categories_score": {
+          "violence_visual": 0.9175,
+          "audio_cue": 0.0,
+          "offensive_speech": 0.0,
+          "spam_fraud": 0.0,
+          "gambling_porn_drugs": 0.0
+        }
+      },
+      {
+        "file": "v=xe4ee56aHSg__1_label_G-0-0.mp4",
+        "truth": 1,
+        "categories": [
+          "explosion"
+        ],
+        "score": 0.9583,
+        "visual": 0.9583,
+        "asr": 0.1591,
+        "ocr": 0.0,
+        "verdict": "block",
+        "labels": [
+          "fire_disaster",
+          "fire_disaster_cartoon"
+        ],
+        "duration": 22.8,
+        "n_frames": 46,
+        "elapsed": 3.5,
+        "cue": 0.0,
+        "categories_score": {
+          "violence_visual": 0.9583,
+          "audio_cue": 0.0,
+          "offensive_speech": 0.0,
+          "spam_fraud": 0.0,
+          "gambling_porn_drugs": 0.0
+        },
+        "temporal": {
+          "iou": 0.1011,
+          "hit_rate": 1.0,
+          "n_gt": 1,
+          "n_pred": 10
+        }
+      }
+    ]
+  },
+  "own_slice": {
+    "name": "自建中文违规切片",
+    "n": 8,
+    "n_pos": 5,
+    "auc": 1.0,
+    "ap": 1.0,
+    "auc_visual": 0.6,
+    "auc_asr": 0.8667,
+    "auc_ocr": 0.6,
+    "adaptive_thresholds": {
+      "review": 0.8859,
+      "block": 0.9446
+    },
+    "thresholds": [
+      {
+        "threshold": 0.4,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "fpr": 0.0,
+        "tp": 5,
+        "fp": 0,
+        "fn": 0,
+        "tn": 3
+      },
+      {
+        "threshold": 0.7,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "fpr": 0.0,
+        "tp": 5,
+        "fp": 0,
+        "fn": 0,
+        "tn": 3
+      },
+      {
+        "threshold": 0.8859,
+        "precision": 1.0,
+        "recall": 0.6,
+        "f1": 0.75,
+        "fpr": 0.0,
+        "tp": 3,
+        "fp": 0,
+        "fn": 2,
+        "tn": 3
+      },
+      {
+        "threshold": 0.9446,
+        "precision": 1.0,
+        "recall": 0.4,
+        "f1": 0.5714,
+        "fpr": 0.0,
+        "tp": 2,
+        "fp": 0,
+        "fn": 3,
+        "tn": 3
+      }
+    ],
+    "visual_channel": {
+      "auc": 0.6,
+      "at_review": {
+        "threshold": 0.8858775563647192,
+        "precision": 1.0,
+        "recall": 0.2,
+        "f1": 0.3333,
+        "fpr": 0.0,
+        "tp": 1,
+        "fp": 0,
+        "fn": 4,
+        "tn": 3
+      },
+      "at_block": {
+        "threshold": 0.9446356323574036,
+        "precision": 1.0,
+        "recall": 0.2,
+        "f1": 0.3333,
+        "fpr": 0.0,
+        "tp": 1,
+        "fp": 0,
+        "fn": 4,
+        "tn": 3
+      }
+    },
+    "label_scope_mismatch": {
+      "n": 0,
+      "n_negatives": 3,
+      "ratio": 0.0,
+      "examples": []
+    },
+    "mean_elapsed_s": 7.15,
+    "mean_duration_s": 85.9,
+    "realtime_factor": 12.01,
+    "rows": [
+      {
+        "file": "ad_scam_short.mp4",
+        "truth": 1,
+        "categories": [
+          "spam",
+          "fraud"
+        ],
+        "score": 0.85,
+        "visual": 0.1555,
+        "asr": 0.85,
+        "ocr": 0.8,
+        "verdict": "pass",
+        "labels": [
+          "asr_contact_wechat",
+          "asr_fraud",
+          "asr_spam",
+          "ocr_contact_wechat",
+          "ocr_fraud",
+          "ocr_short_link",
+          "ocr_spam"
+        ],
+        "duration": 7.5,
+        "n_frames": 7,
+        "elapsed": 2.7,
+        "cue": 0.0,
+        "categories_score": {
+          "violence_visual": 0.1555,
+          "audio_cue": 0.0,
+          "offensive_speech": 0.0,
+          "spam_fraud": 0.85,
+          "gambling_porn_drugs": 0.0
+        }
+      },
+      {
+        "file": "insult_speech_short.mp4",
+        "truth": 1,
+        "categories": [
+          "insult",
+          "offensive"
+        ],
+        "score": 1.0,
+        "visual": 0.1722,
+        "asr": 1.0,
+        "ocr": 0.0,
+        "verdict": "block",
+        "labels": [
+          "asr_insult",
+          "asr_offensive"
+        ],
+        "duration": 4.4,
+        "n_frames": 5,
+        "elapsed": 1.8,
+        "cue": 0.0,
+        "categories_score": {
+          "violence_visual": 0.1722,
+          "audio_cue": 0.0,
+          "offensive_speech": 1.0,
+          "spam_fraud": 0.0,
+          "gambling_porn_drugs": 0.0
+        }
+      },
+      {
+        "file": "gambling_short.mp4",
+        "truth": 1,
+        "categories": [
+          "gambling"
+        ],
+        "score": 0.9,
+        "visual": 0.1529,
+        "asr": 0.9,
+        "ocr": 0.85,
+        "verdict": "review",
+        "labels": [
+          "asr_gambling",
+          "ocr_gambling"
+        ],
+        "duration": 5.0,
+        "n_frames": 5,
+        "elapsed": 2.1,
+        "cue": 0.0,
+        "categories_score": {
+          "violence_visual": 0.1529,
+          "audio_cue": 0.0,
+          "offensive_speech": 0.0,
+          "spam_fraud": 0.0,
+          "gambling_porn_drugs": 0.9
+        }
+      },
+      {
+        "file": "visual_risk_short.mp4",
+        "truth": 1,
+        "categories": [
+          "weapon",
+          "fire_disaster",
+          "protest_crowd"
+        ],
+        "score": 0.9831,
+        "visual": 0.9831,
+        "asr": 0.0,
+        "ocr": 0.0,
+        "verdict": "block",
+        "labels": [
+          "weapon"
+        ],
+        "duration": 4.7,
+        "n_frames": 22,
+        "elapsed": 3.1,
+        "cue": 0.0,
+        "categories_score": {
+          "violence_visual": 0.9831,
+          "audio_cue": 0.0,
+          "offensive_speech": 0.0,
+          "spam_fraud": 0.0,
+          "gambling_porn_drugs": 0.0
+        }
+      },
+      {
+        "file": "benign_synthetic_short.mp4",
+        "truth": 0,
+        "categories": [],
+        "score": 0.1656,
+        "visual": 0.1656,
+        "asr": 0.0,
+        "ocr": 0.0,
+        "verdict": "pass",
+        "labels": [],
+        "duration": 7.5,
+        "n_frames": 8,
+        "elapsed": 2.6,
+        "cue": 0.0,
+        "categories_score": {
+          "violence_visual": 0.1656,
+          "audio_cue": 0.0,
+          "offensive_speech": 0.0,
+          "spam_fraud": 0.0,
+          "gambling_porn_drugs": 0.0
+        }
+      },
+      {
+        "file": "benign_photos_short.mp4",
+        "truth": 0,
+        "categories": [],
+        "score": 0.0865,
+        "visual": 0.0865,
+        "asr": 0.0,
+        "ocr": 0.0,
+        "verdict": "pass",
+        "labels": [],
+        "duration": 4.6,
+        "n_frames": 5,
+        "elapsed": 1.9,
+        "cue": 0.0,
+        "categories_score": {
+          "violence_visual": 0.0865,
+          "audio_cue": 0.0,
+          "offensive_speech": 0.0,
+          "spam_fraud": 0.0,
+          "gambling_porn_drugs": 0.0
+        }
+      },
+      {
+        "file": "long_mixed_with_ad.mp4",
+        "truth": 1,
+        "categories": [
+          "spam",
+          "fraud"
+        ],
+        "score": 0.85,
+        "visual": 0.2126,
+        "asr": 0.85,
+        "ocr": 0.0,
+        "verdict": "pass",
+        "labels": [
+          "asr_fraud",
+          "asr_spam"
+        ],
+        "duration": 18.7,
+        "n_frames": 19,
+        "elapsed": 4.3,
+        "cue": 0.0,
+        "categories_score": {
+          "violence_visual": 0.2126,
+          "audio_cue": 0.0,
+          "offensive_speech": 0.0,
+          "spam_fraud": 0.85,
+          "gambling_porn_drugs": 0.0
+        }
+      },
+      {
+        "file": "bbb_360p.webm",
+        "truth": 0,
+        "categories": [],
+        "score": 0.2717,
+        "visual": 0.2588,
+        "asr": 0.1673,
+        "ocr": 0.2409,
+        "verdict": "pass",
+        "labels": [
+          "emotion_sad"
+        ],
+        "duration": 634.6,
+        "n_frames": 24,
+        "elapsed": 38.7,
+        "cue": 0.1,
+        "categories_score": {
+          "violence_visual": 0.2588,
+          "audio_cue": 0.1,
+          "offensive_speech": 0.0,
+          "spam_fraud": 0.0,
+          "gambling_porn_drugs": 0.0
+        }
+      }
+    ]
+  },
+  "combined": {
+    "name": "合并（公开基准 + 自建切片）",
+    "n": 70,
+    "n_pos": 47,
+    "auc": 0.8802,
+    "ap": 0.9348,
+    "auc_visual": 0.852,
+    "auc_asr": 0.4117,
+    "auc_ocr": 0.4921,
+    "adaptive_thresholds": {
+      "review": 0.8859,
+      "block": 0.9446
+    },
+    "thresholds": [
+      {
+        "threshold": 0.4,
+        "precision": 0.7121,
+        "recall": 1.0,
+        "f1": 0.8319,
+        "fpr": 0.8261,
+        "tp": 47,
+        "fp": 19,
+        "fn": 0,
+        "tn": 4
+      },
+      {
+        "threshold": 0.7,
+        "precision": 0.7344,
+        "recall": 1.0,
+        "f1": 0.8468,
+        "fpr": 0.7391,
+        "tp": 47,
+        "fp": 17,
+        "fn": 0,
+        "tn": 6
+      },
+      {
+        "threshold": 0.8859,
+        "precision": 0.8077,
+        "recall": 0.8936,
+        "f1": 0.8485,
+        "fpr": 0.4348,
+        "tp": 42,
+        "fp": 10,
+        "fn": 5,
+        "tn": 13
+      },
+      {
+        "threshold": 0.9446,
+        "precision": 0.9444,
+        "recall": 0.7234,
+        "f1": 0.8193,
+        "fpr": 0.087,
+        "tp": 34,
+        "fp": 2,
+        "fn": 13,
+        "tn": 21
+      }
+    ],
+    "visual_channel": {
+      "auc": 0.852,
+      "at_review": {
+        "threshold": 0.8858775563647192,
+        "precision": 0.8085,
+        "recall": 0.8085,
+        "f1": 0.8085,
+        "fpr": 0.3913,
+        "tp": 38,
+        "fp": 9,
+        "fn": 9,
+        "tn": 14
+      },
+      "at_block": {
+        "threshold": 0.9446356323574036,
+        "precision": 0.9688,
+        "recall": 0.6596,
+        "f1": 0.7848,
+        "fpr": 0.0435,
+        "tp": 31,
+        "fp": 1,
+        "fn": 16,
+        "tn": 22
+      }
+    },
+    "label_scope_mismatch": {
+      "n": 0,
+      "n_negatives": 23,
+      "ratio": 0.0,
+      "examples": []
+    },
+    "temporal": {
+      "n": 41,
+      "mean_iou": 0.2287,
+      "mean_hit_rate": 0.6084
+    },
+    "mean_elapsed_s": 9.69,
+    "mean_duration_s": 111.0,
+    "realtime_factor": 11.46
+  }
+}

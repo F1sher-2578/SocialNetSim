@@ -1,0 +1,28 @@
+# ---------------- 环境 ----------------
+.venv/
+__pycache__/
+*.py[cod]
+.DS_Store
+
+# ---------------- 数据集（体积大 / 含第三方版权素材）----------------
+# XD-Violence 为电影片段，版权归原作者，不得转发；请用 scripts_fetch_xdviolence.py 自行获取
+data/
+!data/.gitkeep
+
+# ---------------- 运行时产物 ----------------
+logs/
+models/*.pkl
+results/clip_cache.npz
+results/bot_features.csv
+results/reports/
+
+# 保留实验结果 JSON 与阈值校准文件
+!results/*.json
+!models/calibration.json
+
+# ---------------- 其它 ----------------
+*.mp4
+*.webm
+*.wav
+*.parquet
+nohup.out

@@ -1,0 +1,61 @@
+{
+  "n": 1500,
+  "positive_rate": 0.4073333333333333,
+  "rule_time_s": 0.4,
+  "model_time_s": 15.0,
+  "clean": {
+    "rule_only": {
+      "acc": 0.5933,
+      "f1": 0.0701,
+      "precision": 0.5111,
+      "recall": 0.0376,
+      "auc": 0.5063
+    },
+    "model_only": {
+      "acc": 0.8167,
+      "f1": 0.7918,
+      "precision": 0.7366,
+      "recall": 0.856,
+      "auc": 0.8926
+    },
+    "fused": {
+      "acc": 0.808,
+      "f1": 0.7848,
+      "precision": 0.7221,
+      "recall": 0.8592,
+      "auc": 0.8814
+    }
+  },
+  "obfuscated": {
+    "rule_only": {
+      "acc": 0.5933,
+      "f1": 0.0701,
+      "precision": 0.5111,
+      "recall": 0.0376,
+      "auc": 0.5064
+    },
+    "model_only": {
+      "acc": 0.8,
+      "f1": 0.7731,
+      "precision": 0.7187,
+      "recall": 0.8363,
+      "auc": 0.885
+    },
+    "fused": {
+      "acc": 0.7913,
+      "f1": 0.7662,
+      "precision": 0.7047,
+      "recall": 0.8396,
+      "auc": 0.8746
+    }
+  },
+  "obfuscated_no_normalization": {
+    "rule_only": {
+      "acc": 0.594,
+      "f1": 0.0256,
+      "precision": 0.5714,
+      "recall": 0.0131,
+      "auc": 0.5032
+    }
+  }
+}
