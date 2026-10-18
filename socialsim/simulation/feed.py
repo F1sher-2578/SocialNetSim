@@ -7,6 +7,7 @@
 """
 from __future__ import annotations
 import math
+import re
 from datetime import datetime
 from sqlalchemy import select
 from ..db import session_scope
@@ -50,11 +51,45 @@ def get_feed(mode: str = "hot", user_id: int | None = None, limit: int = 30, off
                 "mod_status": p.mod_status, "risk_score": round(p.risk_score or 0, 3),
                 "risk_labels": p.risk_labels, "mod_report": p.mod_report,
                 "author": {"id": a.id if a else 0, "nickname": a.nickname if a else "?",
+                           "username": a.username if a else "", "group": a.bot_group if a else "",
                            "avatar": a.avatar if a else "👤", "is_bot": bool(a.is_bot) if a else False,
                            "bot_score": round(a.bot_score or 0, 3) if a else 0,
                            "bot_flag": bool(a.bot_flag) if a else False},
             })
         return out
+
+
+TOPIC_RE = re.compile(r"#([^\s#，。！？,.!?]+)")
+
+
+def trending_topics(top_n: int = 10, window_hours: float = 6.0) -> list[dict]:
+    """热搜榜：按话题在任意 6 小时窗口内的讨论人数峰值排序。
+
+    与真实平台的趋势榜一样看"突增"而不是累计总量，这也正是话题带节奏的水军
+    在短时间内集中发帖就能冲上榜单的原因。bot_ratio 是真值水军发帖占比，只在审核透视下展示。
+    """
+    from datetime import timedelta
+    win = timedelta(hours=window_hours)
+    with session_scope() as s:
+        rows = s.execute(select(Post.hashtags, Post.content, Post.author_id, Post.created_at, User.is_bot)
+                         .join(User, User.id == Post.author_id)
+                         .where(Post.mod_status != "block")).all()
+    events: dict[str, list] = {}
+    for tags, content, author, at, is_bot in rows:
+        for t in set(TOPIC_RE.findall(f"{tags or ''} {content or ''}")):
+            events.setdefault(t, []).append((at, author, bool(is_bot)))
+    out = []
+    for t, ev in events.items():
+        ev.sort(key=lambda e: e[0])
+        peak, j = 0, 0
+        for i in range(len(ev)):
+            while ev[i][0] - ev[j][0] > win:
+                j += 1
+            peak = max(peak, len({a for _, a, _ in ev[j:i + 1]}))
+        out.append({"topic": t, "peak_authors": peak, "posts": len(ev),
+                    "bot_ratio": round(sum(b for *_, b in ev) / len(ev), 3)})
+    out.sort(key=lambda d: (-d["peak_authors"], -d["posts"]))
+    return out[:top_n]
 
 
 def exposure_report(now: datetime | None = None, top_n: int = 30) -> dict:

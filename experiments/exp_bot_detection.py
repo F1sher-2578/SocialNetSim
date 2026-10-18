@@ -82,6 +82,7 @@ def main(rebuild_db: bool = True, n_users: int = 80):
         print(f"  {k:24s} AUC={v.get('auc', float('nan')):.4f} F1={v.get('f1', float('nan')):.4f} "
               f"P={v.get('precision', float('nan')):.4f} R={v.get('recall', float('nan')):.4f}")
     out["models"] = tbl
+    out["roc"] = {k: res[k]["roc"] for k in tbl if "roc" in res.get(k, {})}
 
     print("\n== Q0b 低误报率下的召回（真实风控更关心）==")
     for k in ("RandomForest", "LightGBM", "LogisticRegression"):

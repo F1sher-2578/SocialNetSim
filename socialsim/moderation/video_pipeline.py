@@ -491,6 +491,7 @@ def write_report(result: dict, frames: list[tuple[float, np.ndarray]], out_dir: 
         thumbs.append({"t": r["t"], "file": f"thumbs/{name}", "score": r["score"], "labels": r["labels"]})
     result_slim = {k: v for k, v in result.items() if k != "frames"}
     result_slim["frames"] = result["frames"]
+    result_slim["thumbs"] = thumbs
     (out_dir / "report.json").write_text(json.dumps(result_slim, ensure_ascii=False, indent=2, default=str), encoding="utf-8")
     html = _render_html(result, thumbs)
     p = out_dir / "report.html"
@@ -498,45 +499,106 @@ def write_report(result: dict, frames: list[tuple[float, np.ndarray]], out_dir: 
     return p
 
 
+LABEL_NAMES = {
+    "contact_wechat": "微信引流", "contact_qq": "QQ 引流", "contact_phone": "手机号引流", "external_link": "外部链接",
+    "short_link": "短链接", "spam": "垃圾广告", "fraud": "诈骗", "gambling": "赌博", "drugs": "毒品", "porn": "色情",
+    "violence": "暴力", "insult": "辱骂", "offensive": "冒犯言论", "obfuscation": "刻意混淆", "gore": "血腥", "weapon": "武器",
+    "smoking_drug": "烟草/毒品", "protest_crowd": "人群聚集", "fire_disaster": "火灾/灾害", "horror": "惊悚",
+    "nsfw": "色情", "nsfw_cartoon": "色情（动画）", "deepfake_suspect": "疑似深度伪造",
+}
+TIMING_NAMES = {"fast_scan": "快速扫描 · 选关键帧", "frame_experts": "帧级视觉专家", "deepfake": "深伪检测",
+                "ocr": "画面文字 OCR", "audio": "语音理解 ASR"}
+
+
+def _label_name(l: str) -> str:
+    for prefix, name in (("asr_", "语音·"), ("ocr_", "画面文字·")):
+        if l.startswith(prefix):
+            return name + _label_name(l[len(prefix):])
+    if l in LABEL_NAMES:
+        return LABEL_NAMES[l]
+    base, _, dom = l.rpartition("_")
+    if base in LABEL_NAMES and dom in ("cartoon", "game"):
+        return f"{LABEL_NAMES[base]}（{'动画' if dom == 'cartoon' else '游戏'}）"
+    return l
+
+
 def _render_html(r: dict, thumbs: list[dict]) -> str:
-    color = {"block": "#c0392b", "review": "#e67e22", "pass": "#27ae60"}[r["verdict"]]
+    """独立报告页：配色与网页端一致；通过 /reports/ 访问时用 ECharts 画时间线，直接从磁盘打开时退回内联 SVG。"""
+    from html import escape as e
+    color = {"block": "#f53f3f", "review": "#ff7d00", "pass": "#00b42a"}[r["verdict"]]
     vname = {"block": "拦截", "review": "人工复核", "pass": "通过"}[r["verdict"]]
+    th = r.get("thresholds", {})
+    t_block, t_review = th.get("block", RISK_BLOCK), th.get("review", RISK_REVIEW)
     pts = [(f["t"], f["score"]) for f in r["frames"]]
     dur = max(1e-6, r["meta"]["duration"])
     poly = " ".join(f"{100 * t / dur:.2f},{100 - 100 * s:.2f}" for t, s in pts)
+    tags = "".join(f'<span class="tag">{e(_label_name(l))}</span>' for l in r["labels"]) or '<span class="muted">无风险标签</span>'
     seg_html = "".join(
-        f"<div class='seg'><b>{s['start']}s – {s['end']}s</b> 峰值 {s['peak']} / 均值 {s['mean']}（{s['n']} 帧）</div>"
+        f"<div class='seg'><b>{s['start']}s – {s['end']}s</b>　峰值 {s['peak']} · 均值 {s['mean']}（{s['n']} 帧）</div>"
         for s in r["segments"]) or "<div class='muted'>未发现连续高风险片段</div>"
     thumb_html = "".join(
-        f"<figure><img src='{t['file']}'><figcaption>{t['t']}s · {t['score']:.2f}<br><span class='muted'>{', '.join(t['labels']) or '无'}</span></figcaption></figure>"
+        f"<figure><div class='blur'><img src='{t['file']}' alt='证据帧'></div><figcaption>{t['t']}s · {t['score']:.2f}<br>"
+        f"<span class='muted'>{e('、'.join(_label_name(l) for l in t['labels']) or '无标签')}</span></figcaption></figure>"
         for t in thumbs) or "<div class='muted'>无高风险帧</div>"
-    asr = "".join(f"<tr><td>{h['start']}–{h['end']}s</td><td>{h['text']}</td><td>{h['risk']:.2f}</td><td>{', '.join(h['labels'])}</td></tr>"
+    asr = "".join(f"<tr><td>{h['start']}–{h['end']}s</td><td>{e(h['text'])}</td><td>{h['risk']:.2f}</td>"
+                  f"<td>{e('、'.join(_label_name(l) for l in h['labels']))}</td></tr>"
                   for h in r["asr_hits"]) or "<tr><td colspan=4 class='muted'>无风险语音片段</td></tr>"
-    ocr = "".join(f"<tr><td>{h['t']}s</td><td>{h['text']}</td><td>{h['score']:.2f}</td><td>{', '.join(h['labels'])}</td></tr>"
+    ocr = "".join(f"<tr><td>{h['t']}s</td><td>{e(h['text'])}</td><td>{h['score']:.2f}</td>"
+                  f"<td>{e('、'.join(_label_name(l) for l in h['labels']))}</td></tr>"
                   for h in r["ocr_hits"]) or "<tr><td colspan=4 class='muted'>无风险画面文字</td></tr>"
-    transcript = (r["audio"].get("full_text") or "")[:1200] if r["audio"].get("available") else "（无音轨或未启用）"
-    return f"""<!doctype html><html lang="zh"><meta charset="utf-8">
-<title>视频审核报告 · {Path(r['path']).name}</title>
+    transcript = e((r["audio"].get("full_text") or "")[:1200]) if r["audio"].get("available") else "（无音轨或未启用）"
+    total_t = max(1e-6, sum(r["timing"].values()))
+    timing = "".join(f"<div class='tm'><span>{TIMING_NAMES.get(k, k)}</span><i style='width:{100 * v / total_t:.1f}%'></i><b>{v}s</b></div>"
+                     for k, v in r["timing"].items())
+    # 给 ECharts 用的精简数据；"</" 转义，防止文本里出现 </script> 提前结束脚本
+    data = json.dumps({"dur": dur, "review": t_review, "block": t_block,
+                       "frames": [[f["t"], round(f["score"], 4)] for f in r["frames"]],
+                       "segments": [[s["start"], s["end"]] for s in r["segments"]],
+                       "asr": [[h["start"], round(h["risk"], 3), h["text"]] for h in r["asr_hits"]],
+                       "ocr": [[h["t"], round(h["score"], 3), h["text"]] for h in r["ocr_hits"]]},
+                      ensure_ascii=False).replace("</", "<\\/")
+    return f"""<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>视频审核报告 · {e(Path(r['path']).name)}</title>
 <style>
-body{{font-family:-apple-system,"PingFang SC",sans-serif;margin:0;background:#f5f6f8;color:#222}}
-.wrap{{max-width:980px;margin:0 auto;padding:24px}}
-h1{{font-size:20px;margin:0 0 4px}} h2{{font-size:15px;margin:22px 0 8px;color:#444}}
-.card{{background:#fff;border-radius:10px;padding:16px 18px;margin-bottom:14px;box-shadow:0 1px 3px rgba(0,0,0,.07)}}
-.verdict{{display:inline-block;padding:5px 14px;border-radius:20px;color:#fff;background:{color};font-weight:600}}
-.grid{{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px}}
-.kv{{background:#fafbfc;border-radius:7px;padding:9px 11px}} .kv b{{display:block;font-size:17px}}
-.muted{{color:#999;font-size:12px}}
-table{{width:100%;border-collapse:collapse;font-size:13px}} td,th{{border-bottom:1px solid #eee;padding:6px 8px;text-align:left;vertical-align:top}}
-figure{{margin:0;display:inline-block;width:150px;vertical-align:top;margin-right:8px}}
-figure img{{width:100%;border-radius:6px}} figcaption{{font-size:11px;text-align:center;margin-top:3px}}
-.seg{{padding:5px 0;border-bottom:1px dashed #eee;font-size:13px}}
-.tag{{display:inline-block;background:#eef1f5;border-radius:4px;padding:2px 7px;margin:2px;font-size:12px}}
-svg{{width:100%;height:120px;background:#fafbfc;border-radius:7px}}
-</style><div class="wrap">
-<div class="card"><h1>视频审核报告</h1>
-<div class="muted">{r['path']} · 分析于 {r['analyzed_at']} · 耗时 {r['elapsed']}s</div>
-<p><span class="verdict">{vname}</span> &nbsp; 综合风险分 <b style="font-size:20px">{r['score']:.3f}</b></p>
-<div>{''.join(f'<span class="tag">{l}</span>' for l in r['labels']) or '<span class="muted">无风险标签</span>'}</div></div>
+:root{{--text:#1d2129;--sub:#86909c;--line:#e5e6eb;--fill:#f7f8fa}}
+*{{box-sizing:border-box}}
+body{{font-family:"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",-apple-system,sans-serif;margin:0;background:#f2f3f5;color:var(--text);font-size:14px}}
+.wrap{{max-width:1040px;margin:0 auto;padding:28px 24px}}
+.head{{background:#fff;border-radius:14px;padding:22px 24px;margin-bottom:16px;display:flex;gap:20px;align-items:center;
+  box-shadow:0 1px 2px rgba(0,0,0,.03),0 4px 12px rgba(0,0,0,.035);border-left:6px solid {color}}}
+.head h1{{font-size:20px;margin:0 0 6px}}
+.verdict{{display:inline-flex;align-items:center;padding:4px 14px;border-radius:20px;color:#fff;background:{color};font-weight:600}}
+.score{{text-align:center;min-width:120px}} .score b{{display:block;font-size:34px;color:{color};font-variant-numeric:tabular-nums}}
+h2{{font-size:15px;margin:0 0 12px}}
+.card{{background:#fff;border-radius:12px;padding:18px 20px;margin-bottom:16px;box-shadow:0 1px 2px rgba(0,0,0,.03),0 4px 12px rgba(0,0,0,.035)}}
+.grid{{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}}
+.kv{{background:var(--fill);border-radius:8px;padding:10px 12px}} .kv b{{display:block;font-size:18px;font-variant-numeric:tabular-nums}}
+.muted{{color:var(--sub);font-size:12px}}
+table{{width:100%;border-collapse:collapse;font-size:13px}} td,th{{border-bottom:1px solid #f0f1f3;padding:8px;text-align:left;vertical-align:top}}
+th{{background:var(--fill);color:#4e5969;font-weight:500;font-size:12px}}
+figure{{margin:0;display:inline-block;width:156px;vertical-align:top;margin:0 10px 10px 0}}
+.blur{{border-radius:8px;overflow:hidden;background:#000;position:relative}}
+.blur img{{display:block;width:100%;filter:blur(14px) saturate(.6);transform:scale(1.08);transition:filter .25s,transform .25s}}
+.blur:hover img{{filter:none;transform:none}}
+.blur::after{{content:"悬停查看";position:absolute;right:6px;bottom:6px;font-size:11px;color:#fff;background:rgba(0,0,0,.45);padding:1px 6px;border-radius:4px}}
+.blur:hover::after{{opacity:0}}
+figcaption{{font-size:11px;text-align:center;margin-top:4px;line-height:1.5}}
+.seg{{padding:7px 0;border-bottom:1px dashed #eee;font-size:13px}}
+.tag{{display:inline-block;background:#f2f3f5;border-radius:10px;padding:2px 9px;margin:2px;font-size:12px;color:#4e5969}}
+svg{{width:100%;height:140px;background:var(--fill);border-radius:8px}}
+#tl{{height:260px;display:none}}
+.tm{{display:grid;grid-template-columns:150px 1fr 60px;gap:10px;align-items:center;font-size:12.5px;margin:6px 0}}
+.tm i{{display:block;height:8px;border-radius:4px;background:#165dff}} .tm b{{font-weight:500;text-align:right}}
+@media print{{body{{background:#fff}} .card,.head{{box-shadow:none;border:1px solid var(--line);break-inside:avoid}}
+  .blur img{{filter:none;transform:none}} .blur::after{{display:none}}}}
+</style>
+<div class="wrap">
+<div class="head">
+  <div style="flex:1;min-width:0"><h1>视频审核报告</h1>
+    <div class="muted">{e(Path(r['path']).name)} · 分析于 {r['analyzed_at']} · 耗时 {r['elapsed']}s</div>
+    <div style="margin-top:10px"><span class="verdict">{vname}</span>　{tags}</div></div>
+  <div class="score"><b>{r['score']:.3f}</b><span class="muted">综合风险分</span></div>
+</div>
 
 <div class="card"><h2>视频信息与处理统计</h2><div class="grid">
 <div class="kv"><b>{r['meta']['duration']:.1f}s</b><span class="muted">时长（{'短视频' if r['meta']['kind']=='short' else '长视频'}）</span></div>
@@ -544,22 +606,52 @@ svg{{width:100%;height:120px;background:#fafbfc;border-radius:7px}}
 <div class="kv"><b>{r['n_frames_analyzed']}</b><span class="muted">分析帧数</span></div>
 <div class="kv"><b>{r['n_scene_cuts']}</b><span class="muted">镜头切换</span></div>
 <div class="kv"><b>{r['n_faces']}</b><span class="muted">人脸数</span></div>
-<div class="kv"><b>{r['deepfake_max']:.2f}</b><span class="muted">深伪最高分</span></div>
+<div class="kv"><b>{r['visual_score']:.2f} / {r['asr_score']:.2f} / {r['ocr_score']:.2f}</b><span class="muted">视觉 / 语音 / 画面文字</span></div>
 </div></div>
 
-<div class="card"><h2>风险时间轴（帧级分数）</h2>
-<svg viewBox="0 0 100 100" preserveAspectRatio="none">
-<line x1="0" y1="{100-100*r.get('thresholds',{}).get('block',RISK_BLOCK)}" x2="100" y2="{100-100*r.get('thresholds',{}).get('block',RISK_BLOCK)}" stroke="#c0392b" stroke-width=".4" stroke-dasharray="1.5"/>
-<line x1="0" y1="{100-100*r.get('thresholds',{}).get('review',RISK_REVIEW)}" x2="100" y2="{100-100*r.get('thresholds',{}).get('review',RISK_REVIEW)}" stroke="#e67e22" stroke-width=".4" stroke-dasharray="1.5"/>
-<polyline points="{poly}" fill="none" stroke="#2c6fbb" stroke-width=".8"/></svg>
-<div class="muted">横轴时间 0–{dur:.0f}s，纵轴风险分 0–1；红线=拦截阈值 {r.get('thresholds',{}).get('block',RISK_BLOCK):.3f}，橙线=复核阈值 {r.get('thresholds',{}).get('review',RISK_REVIEW):.3f}</div></div>
+<div class="card"><h2>风险时间线</h2>
+<div id="tl"></div>
+<svg id="tl-svg" viewBox="0 0 100 100" preserveAspectRatio="none">
+<line x1="0" y1="{100-100*t_block}" x2="100" y2="{100-100*t_block}" stroke="#f53f3f" stroke-width=".4" stroke-dasharray="1.5"/>
+<line x1="0" y1="{100-100*t_review}" x2="100" y2="{100-100*t_review}" stroke="#ff7d00" stroke-width=".4" stroke-dasharray="1.5"/>
+<polyline points="{poly}" fill="none" stroke="#165dff" stroke-width=".8"/></svg>
+<div class="muted" style="margin-top:6px">横轴时间 0–{dur:.0f}s，纵轴帧级风险分 0–1；红线 = 拦截阈值 {t_block:.3f}，橙线 = 复核阈值 {t_review:.3f}；红底 = 高风险片段</div></div>
 
 <div class="card"><h2>高风险片段</h2>{seg_html}</div>
-<div class="card"><h2>证据帧</h2>{thumb_html}</div>
+<div class="card"><h2>证据帧 <span class="muted">默认模糊，鼠标悬停才显示</span></h2>{thumb_html}</div>
 <div class="card"><h2>语音识别风险片段</h2><table><tr><th>时间</th><th>识别文本</th><th>风险</th><th>标签</th></tr>{asr}</table>
-<div class="muted" style="margin-top:8px">完整转写：{transcript}</div></div>
+<div class="muted" style="margin-top:8px;line-height:1.7">完整转写：{transcript}</div></div>
 <div class="card"><h2>画面文字（OCR）风险</h2><table><tr><th>时间</th><th>文本</th><th>风险</th><th>标签</th></tr>{ocr}</table></div>
-<div class="card"><h2>各阶段耗时</h2><div class="grid">
-{''.join(f'<div class="kv"><b>{v}s</b><span class="muted">{k}</span></div>' for k, v in r['timing'].items())}
-</div></div>
-</div></html>"""
+<div class="card"><h2>各阶段耗时</h2>{timing}</div>
+<div class="muted" style="text-align:center">SocialNetSim · 本地沙箱生成的审核报告</div>
+</div>
+<script src="/static/vendor/echarts/6.1.0/echarts.min.js"></script>
+<script>
+// 通过网页端（/reports/）打开时能加载到本地 ECharts，画可缩放的时间线；从磁盘直接打开时保留上面的 SVG
+(function () {{
+  if (!window.echarts) return;
+  var R = {data}, el = document.getElementById('tl');
+  el.style.display = 'block'; document.getElementById('tl-svg').style.display = 'none';
+  var hit = function (name, rows, y) {{ return rows.map(function (h) {{ return {{ value: [h[0], y], risk: h[1], text: h[2], kind: name }}; }}); }};
+  echarts.init(el).setOption({{
+    textStyle: {{ fontFamily: '"PingFang SC","Microsoft YaHei",sans-serif' }},
+    tooltip: {{ trigger: 'item', confine: true, formatter: function (p) {{
+      return p.seriesIndex === 0 ? p.value[0] + 's · 帧级风险 <b>' + p.value[1] + '</b>' : p.data.kind + ' · ' + p.value[0] + 's<br>' + p.data.text + '<br>风险 ' + p.data.risk; }} }},
+    grid: [{{ left: 72, right: 20, top: 14, height: 150 }}, {{ left: 72, right: 20, top: 186, height: 40 }}],
+    xAxis: [{{ type: 'value', min: 0, max: +R.dur.toFixed(1), axisLabel: {{ show: false }}, splitLine: {{ show: false }} }},
+            {{ type: 'value', gridIndex: 1, min: 0, max: +R.dur.toFixed(1), axisLabel: {{ formatter: '{{value}}s', color: '#86909c' }}, splitLine: {{ show: false }} }}],
+    yAxis: [{{ type: 'value', min: 0, max: 1, splitNumber: 2, axisLabel: {{ color: '#86909c' }}, splitLine: {{ lineStyle: {{ color: '#f0f1f3' }} }} }},
+            {{ type: 'category', gridIndex: 1, data: ['画面文字', '语音'], axisLine: {{ show: false }}, axisTick: {{ show: false }}, axisLabel: {{ color: '#4e5969', fontSize: 11 }} }}],
+    visualMap: {{ show: false, seriesIndex: 0, pieces: [{{ lt: R.review, color: '#00b42a' }}, {{ gte: R.review, lt: R.block, color: '#ff7d00' }}, {{ gte: R.block, color: '#f53f3f' }}] }},
+    dataZoom: [{{ type: 'inside', xAxisIndex: [0, 1], zoomOnMouseWheel: 'ctrl', moveOnMouseWheel: false }}],
+    series: [
+      {{ type: 'line', data: R.frames, showSymbol: R.frames.length < 40, symbolSize: 5, areaStyle: {{ opacity: 0.08 }},
+        markLine: {{ symbol: 'none', silent: true, data: [{{ yAxis: R.review, lineStyle: {{ color: '#ff7d00', type: 'dashed' }} }}, {{ yAxis: R.block, lineStyle: {{ color: '#f53f3f', type: 'dashed' }} }}], label: {{ show: false }} }},
+        markArea: {{ silent: true, itemStyle: {{ color: 'rgba(245,63,63,.08)' }}, data: R.segments.map(function (s) {{ return [{{ xAxis: s[0] }}, {{ xAxis: s[1] }}]; }}) }} }},
+      {{ type: 'scatter', xAxisIndex: 1, yAxisIndex: 1, symbol: 'roundRect', symbolSize: 13, data: hit('语音', R.asr, 1).concat(hit('画面文字', R.ocr, 0)),
+        itemStyle: {{ color: function (p) {{ return p.data.risk >= R.block ? '#f53f3f' : p.data.risk >= R.review ? '#ff7d00' : '#165dff'; }} }} }}
+    ]
+  }});
+}})();
+</script>
+</html>"""

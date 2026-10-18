@@ -165,7 +165,8 @@ def rule_expert(text: str, allow_pinyin: bool = True, require_solicit: bool = Fa
     if len(hits) >= 3:
         score = min(1.0, score + 0.05)
     return {"score": float(score), "labels": sorted(labels), "hits": hits, "structures": struct,
-            "obfuscated": obf, "normalized": v["dedup"][:200]}
+            "obfuscated": obf, "normalized": v["dedup"][:200],
+            "stages": {k: v[k][:200] for k in ("raw", "nfkc", "compact", "dedup", "homo", "pinyin")}}
 
 
 def cold_expert(texts: list[str]) -> list[float]:

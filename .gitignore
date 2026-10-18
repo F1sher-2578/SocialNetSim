@@ -19,6 +19,8 @@ results/reports/
 # 保留实验结果 JSON 与阈值校准文件
 !results/*.json
 !models/calibration.json
+# 网页端「重新提取特征并评估」的即时结果，随沙箱状态变化
+results/bot_detection_live.json
 
 # ---------------- 其它 ----------------
 *.mp4

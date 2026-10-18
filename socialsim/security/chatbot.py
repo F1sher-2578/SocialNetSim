@@ -19,6 +19,7 @@
 from __future__ import annotations
 import os
 import re
+import time
 from datetime import datetime
 
 from sqlalchemy import select
@@ -121,14 +122,19 @@ def chat(message: str, session_id: str = "default", guard: bool = True,
     trace = {"guard_enabled": guard, "layers": {}}
     t0 = datetime.now()
 
+    def ms(start: float) -> float:      # 各层耗时，前端护栏透视面板展示
+        return round((time.perf_counter() - start) * 1000, 1)
+
     # ---- L1 / L2：输入护栏 ----
     if guard:
+        t = time.perf_counter()
         inj = detect_injection(message, is_untrusted_content=False)
+        inj["ms"] = ms(t)
         trace["layers"]["L1L2_input"] = inj
         if inj["verdict"] == "block":
             reply = REFUSAL
-            _save(session_id, message, reply, trace)
             trace["blocked_at"] = "input"
+            _save(session_id, message, reply, trace)
             return {"reply": reply, "trace": trace, "elapsed": (datetime.now() - t0).total_seconds()}
     else:
         trace["layers"]["L1L2_input"] = {"skipped": True}
@@ -148,11 +154,13 @@ def chat(message: str, session_id: str = "default", guard: bool = True,
 
     # ---- L3：Spotlighting 隔离不可信内容 ----
     if raw_untrusted.strip():
+        t = time.perf_counter()
         ind = detect_injection(raw_untrusted, is_untrusted_content=True)
+        ind["ms"] = ms(t)
         trace["layers"]["L3_untrusted_scan"] = ind
         if guard:
             context = spotlight(raw_untrusted)
-            trace["layers"]["L3_spotlight"] = {"applied": True, "chars": len(context)}
+            trace["layers"]["L3_spotlight"] = {"applied": True, "chars": len(context), "preview": context[:600]}
             if ind["verdict"] in ("block", "review"):
                 trace["indirect_injection_detected"] = True
         else:
@@ -161,16 +169,20 @@ def chat(message: str, session_id: str = "default", guard: bool = True,
             trace["layers"]["L3_spotlight"] = {"applied": False}
 
     # ---- 生成 ----
+    t = time.perf_counter()
     reply = _backend_llm(message, context)
     backend = "llm"
     if reply is None:
         reply = _simulate(message, context, guard, trace)
         backend = "rule"
     trace["backend"] = backend
+    trace["generate_ms"] = ms(t)
 
     # ---- L4：输出守卫 ----
     if guard:
+        t = time.perf_counter()
         out = check_output(reply, SYSTEM_PROMPT)
+        out["ms"] = ms(t)
         trace["layers"]["L4_output"] = out
         if out["verdict"] == "block":
             reply = REFUSAL

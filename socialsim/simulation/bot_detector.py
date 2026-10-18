@@ -335,6 +335,15 @@ def recall_at_fpr(y, score, target_fpr: float = 0.01) -> dict:
             "actual_fpr": round(float(pred[y == 0].mean()), 4)}
 
 
+def roc_points(y, score, max_points: int = 100) -> list[list[float]]:
+    """ROC 曲线降采样到不超过 max_points 个点，供前端绘图。"""
+    fpr, tpr, _ = roc_curve(y, score)
+    if len(fpr) > max_points:
+        idx = np.unique(np.linspace(0, len(fpr) - 1, max_points).round().astype(int))
+        fpr, tpr = fpr[idx], tpr[idx]
+    return [np.round(fpr, 4).tolist(), np.round(tpr, 4).tolist()]
+
+
 def campaign_level(df: pd.DataFrame, score: np.ndarray, th: float = 0.5,
                    min_frac: float = 0.5) -> dict:
     """团伙级指标：一个团伙中超过 min_frac 的账号被标记，即认为该团伙被检出。
@@ -412,13 +421,14 @@ def evaluate(df: pd.DataFrame, seed: int = 0) -> dict:
                      "confusion": confusion_matrix(y, pred).tolist(),
                      "recall@fpr1%": recall_at_fpr(y, prob, 0.01),
                      "recall@fpr5%": recall_at_fpr(y, prob, 0.05)}
+        res[name]["roc"] = roc_points(y, prob)
         if name == "RandomForest":
             res[name]["prob"] = prob.tolist()
-            fpr, tpr, _ = roc_curve(y, prob); res[name]["roc"] = [fpr.tolist(), tpr.tolist()]
     # 无监督：孤立森林（不使用标签）
     iso = IsolationForest(n_estimators=300, contamination=0.3, random_state=seed).fit(X)
     score = -iso.score_samples(X)
-    res["IsolationForest(unsup)"] = {"auc": roc_auc_score(y, score), "ap": average_precision_score(y, score)}
+    res["IsolationForest(unsup)"] = {"auc": roc_auc_score(y, score), "ap": average_precision_score(y, score),
+                                     "roc": roc_points(y, score)}
     # 规则基线：协同同步 + 新账号 + 内容重复
     rule = ((df["sync_ratio"] > 0.5) & (df["account_age_days"] < 10)) | (df["cross_dup"] > 0.5) | (df["community_new_ratio"] > 0.8)
     res["RuleBaseline"] = {"f1": f1_score(y, rule.astype(int)), "precision": precision_score(y, rule.astype(int)), "recall": recall_score(y, rule.astype(int))}
@@ -446,8 +456,10 @@ def score_all() -> dict:
             u = s.get(User, int(uid)); u.bot_score = float(p); u.bot_flag = bool(p >= 0.5)
     df["bot_score"] = prob
     df.to_csv(RESULT_DIR / "bot_features.csv", index=False)
-    summary = {k: {kk: vv for kk, vv in v.items() if kk not in ("prob", "roc")} if isinstance(v, dict) else v for k, v in res.items()}
-    with open(RESULT_DIR / "bot_detection_metrics.json", "w", encoding="utf-8") as f:
+    summary = {k: {kk: vv for kk, vv in v.items() if kk != "prob"} if isinstance(v, dict) else v for k, v in res.items()}
+    # 网页端的即时评估单独存放：bot_detection_metrics.json 归 experiments/exp_bot_detection.py 所有，
+    # 其中的跨规避等级泛化等指标只在离线实验里计算，覆盖掉就丢了
+    with open(RESULT_DIR / "bot_detection_live.json", "w", encoding="utf-8") as f:
         json.dump(summary, f, ensure_ascii=False, indent=2)
     return res
 
@@ -467,4 +479,19 @@ def explain(user_id: int) -> dict:
         pct = float((df[f] <= row[f]).mean())
         evid.append({"feature": f, "value": float(row[f]), "percentile": pct, "weight": float(w), "score": float(w * abs(pct - 0.5) * 2)})
     evid.sort(key=lambda e: -e["score"])
-    return {"user_id": int(user_id), "bot_score": float(row.get("bot_score", 0.0)), "evidence": evid[:8]}
+    # 雷达图：各特征组内，该账号朝"水军方向"偏离的平均分位（0.5 = 与全体中位数持平）。
+    # 方向取真值水军与正常用户的中位数之差，只用于展示，不参与判定。
+    bots, humans = df[df["is_bot"] == 1], df[df["is_bot"] == 0]
+    group_of = {f: g for g, cols in GROUPS.items() for f in cols}
+    profile = {}
+    for g, cols in GROUPS.items():
+        vals = []
+        for f in cols:
+            pct = float((df[f] <= row[f]).mean())
+            vals.append(pct if bots[f].median() >= humans[f].median() else 1 - pct)
+        profile[g] = round(float(np.mean(vals)), 4)
+    for e in evid:
+        e["group"] = group_of.get(e["feature"], "")
+    # 实验脚本写出的 csv 用 score 列，网页评估写的是 bot_score
+    score = row.get("bot_score", row.get("score", 0.0))
+    return {"user_id": int(user_id), "bot_score": float(score), "evidence": evid[:8], "group_profile": profile}
